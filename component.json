@@ -1,0 +1,20 @@
+{
+  "title": "PostreSQL",
+  "description": "Simple SQL query against a PostgreSQL",
+  "credentials": {
+    "fields": {
+      "name": {
+        "label": "My API Key",
+        "required": true,
+        "viewClass": "TextFieldView"
+      }
+    }
+  },
+  "actions": {
+    "sqlQuery": {
+      "title": "SQL Query",
+      "main": "./lib/actions/sqlQuery.js",
+      "dynamicMetadata": true
+    }
+  }
+}
