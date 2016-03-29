@@ -32,6 +32,6 @@
       "mocha": true
     }
   },
-  "repository": "elasticio/postre-sql-component",
+  "repository": "elasticio/postgresql-component",
   "license": "Apache-2.0"
 }

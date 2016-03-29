@@ -1,5 +1,5 @@
 {
-  "title": "PostreSQL",
+  "title": "PostgreSQL",
   "description": "Simple SQL query against a PostgreSQL",
   "credentials": {
     "fields": {
