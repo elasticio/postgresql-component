@@ -14,7 +14,12 @@
     "sqlQuery": {
       "title": "SQL Query",
       "main": "./lib/actions/sqlQuery.js",
-      "dynamicMetadata": true
+      "dynamicMetadata": true,
+      "fields": {
+        "label": "SQL Query",
+        "required": true,
+        "viewClass": "TextAreaView"
+      }
     }
   }
 }
