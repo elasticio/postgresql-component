@@ -22,7 +22,7 @@ describe('SQL Parser', function () {
     it('should produce a runnable query', function() {
         var sql = "select id,name,url,phone from companies where name = $name";
         var result = utils.parseSQL(sql);
-        assert.equal(result.query, 'SELECT `id`, `name`, `url`, `phone`\n  FROM `companies`\n  WHERE (`name` = $1)');
+        assert.equal(result.query, 'SELECT id, name, url, phone\n  FROM companies\n  WHERE (name = $1)');
         assert.equal(result.params.length, 1);
         assert.equal(result.params[0].type, 'string');
         assert.equal(result.params[0].value, 'name');
