@@ -44,7 +44,7 @@ There are several limitations of the component:
 
 ![image](https://cloud.githubusercontent.com/assets/56208/14229261/b6586dfa-f92f-11e5-8489-2042dc590915.png)
 
-If in doubpt call support.
+If in doubt call support.
 
 ## License
 
