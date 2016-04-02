@@ -1,4 +1,4 @@
-# postre-sql-component [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# postre-sql-component [[![Build Status][travis-image]][https://travis-ci.org/elasticio/postgresql-component.svg?branch=master] [![Dependency Status][daviddm-image]][daviddm-url]
 > PostgreSQL component for elastic.io platform
 
 # postre-sql-component
