@@ -33,6 +33,15 @@ Now we are ready to push it:
 $ git push elasticio master
 ```
 
+# How to use it
+
+There are several limitations of the component:
+
+1. Only ``SELECT`` queries are currently supported
+2. Only valid ``SELECT`` queries are supported
+3. When specifying your ``SELECT`` query you may not use ``*`` like in ``SELECT * FROM foo``. You always have to specify the comma-separated list of values you want to see in response.
+4. 
+
 ## License
 
 Apache-2.0 © [elastic.io GmbH](http://elastic.io)
