@@ -27,5 +27,42 @@ describe('SQL Parser', function () {
         assert.equal(result.params[0].type, 'string');
         assert.equal(result.params[0].value, 'name');
     });
+});
 
+describe('Parameter parsing', function() {
+    it("should handle simple list", function() {
+        var params = [
+            { value: 'foo', type: 'string' },
+            { value: 'baz', type: 'string' }
+        ];
+        var result = utils.createParametersArray(params, {
+            foo: 'bar'
+        });
+        assert.equal(result.length, 2);
+        assert.equal(typeof result[0],'string');
+        assert.equal(result[0], 'bar');
+        assert.equal(typeof result[2],'undefined');
+    });
+    it("should handle types", function() {
+        var params = [
+            { value: 'foo', type: 'string' },
+            { value: 'baz', type: 'number' },
+            { value: 'bazStr', type: 'number' },
+            { value: 'flo', type: 'float' },
+            { value: 'bool', type: 'boolean' }
+        ];
+        var result = utils.createParametersArray(params, {
+            foo: 'bar',
+            baz: 123,
+            bazStr: '123',
+            flo: '123,4',
+            bool: 'false'
+        });
+        assert.equal(result.length, 5);
+        assert.equal(typeof result[0], 'string');
+        assert.equal(typeof result[1], 'number');
+        assert.equal(typeof result[2], 'number');
+        assert.equal(typeof result[3], 'number');
+        assert.equal(typeof result[4], 'boolean');
+    });
 });
