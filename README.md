@@ -38,9 +38,7 @@ $ git push elasticio master
 Apache-2.0 © [elastic.io GmbH](http://elastic.io)
 
 
-[npm-image]: https://badge.fury.io/js/postgre-sql-component.svg
-[npm-url]: https://npmjs.org/package/postgre-sql-component
-[travis-image]: https://travis-ci.org/elasticio/postgre-sql-component.svg?branch=master
-[travis-url]: https://travis-ci.org/elasticio/postgre-sql-component
-[daviddm-image]: https://david-dm.org/elasticio/postgre-sql-component.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/elasticio/postgre-sql-component
+[travis-image]: https://travis-ci.org/elasticio/postgresql-component.svg?branch=master
+[travis-url]: https://travis-ci.org/elasticio/postgresql-component
+[daviddm-image]: https://david-dm.org/elasticio/postgresql-component.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/elasticio/postgresql-component
