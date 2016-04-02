@@ -2,9 +2,9 @@
 > PostgreSQL component for elastic.io platform
 
 # postre-sql-component
-&gt; PostreSQL component for the [elastic.io platform](http://www.elastic.io &#34;elastic.io platform&#34;)
+PostreSQL component for the [elastic.io platform](http://www.elastic.io &#34;elastic.io platform&#34;)
 
-&lt;%- componentDescription -&gt;. If you plan to **deploy it into [elastic.io platform](http://www.elastic.io &#34;elastic.io platform&#34;) you must follow sets of instructions to succseed**. 
+If you plan to **deploy it into [elastic.io platform](http://www.elastic.io &#34;elastic.io platform&#34;) you must follow sets of instructions to succseed**. 
 
 ## Before you Begin
 
