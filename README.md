@@ -40,7 +40,11 @@ There are several limitations of the component:
 1. Only ``SELECT`` queries are currently supported
 2. Only valid ``SELECT`` queries are supported
 3. When specifying your ``SELECT`` query you may not use ``*`` like in ``SELECT * FROM foo``. You always have to specify the comma-separated list of values you want to see in response.
-4. 
+4. You may augument your SQL query ``WHERE`` statement with the type information, e.g. ``SELECT a FROM foo WHERE age = $age:number``, supported type modifiers are ``number``, ``float``,``boolean`` and ``string``. When ommitted ``string`` is assumed by default.
+
+![image](https://cloud.githubusercontent.com/assets/56208/14229261/b6586dfa-f92f-11e5-8489-2042dc590915.png)
+
+If in doubpt call support.
 
 ## License
 
