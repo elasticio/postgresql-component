@@ -3,10 +3,11 @@
   "description": "Simple SQL query against a PostgreSQL",
   "credentials": {
     "fields": {
-      "name": {
-        "label": "My API Key",
+      "conString": {
+        "label": "Connection String",
         "required": true,
-        "viewClass": "TextFieldView"
+        "viewClass": "TextFieldView",
+        "placeholder": "postgres://username:password@localhost/database"
       }
     }
   },
