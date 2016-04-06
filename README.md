@@ -1,10 +1,11 @@
-# postre-sql-component [![Build Status](https://travis-ci.org/elasticio/postgresql-component.svg?branch=master)](https://travis-ci.org/elasticio/postgresql-component) [![Dependency Status][daviddm-image]][daviddm-url]
+# postgre-sql-component [![Build Status](https://travis-ci.org/elasticio/postgresql-component.svg?branch=master)](https://travis-ci.org/elasticio/postgresql-component) [![Dependency Status][daviddm-image]][daviddm-url]
+
 > PostgreSQL component for elastic.io platform
 
-# postre-sql-component
-PostreSQL component for the [elastic.io platform](http://www.elastic.io &#34;elastic.io platform&#34;)
+# postgre-sql-component
+PostgreSQL component for the [elastic.io platform](http://www.elastic.io)
 
-If you plan to **deploy it into [elastic.io platform](http://www.elastic.io &#34;elastic.io platform&#34;) you must follow sets of instructions to succseed**. 
+If you plan to **deploy it into [elastic.io platform](http://www.elastic.io) you must follow sets of instructions to succseed**. 
 
 ## Before you Begin
 
