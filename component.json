@@ -1,6 +1,7 @@
 {
   "title": "PostgreSQL",
   "description": "Simple SQL query against a PostgreSQL",
+  "docsUrl":"https://github.com/elasticio/postgresql-component",
   "credentials": {
     "fields": {
       "conString": {
