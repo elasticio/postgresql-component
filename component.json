@@ -32,6 +32,7 @@
       "title": "SQL Query",
       "main": "./lib/actions/sqlQuery.js",
       "dynamicMetadata": true,
+      "type": "polling",
       "fields": {
         "query": {
           "label": "SQL Query",
