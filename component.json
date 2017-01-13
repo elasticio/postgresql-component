@@ -26,5 +26,20 @@
         }
       }
     }
+  },
+  "triggers": {
+    "sqlQuery": {
+      "title": "SQL Query",
+      "main": "./lib/actions/sqlQuery.js",
+      "dynamicMetadata": true,
+      "fields": {
+        "query": {
+          "label": "SQL Query",
+          "required": true,
+          "viewClass": "TextAreaView",
+          "default": "SELECT id:number, name, email FROM customers WHERE account_id = $accountId:string"
+        }
+      }
+    }
   }
 }
