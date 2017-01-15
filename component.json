@@ -36,13 +36,18 @@
           "viewClass": "TextAreaWithNoteView",
           "placeholder": "SELECT * FROM films WHERE title LIKE ${'%' + query + '%'}",
           "note": "You can use properties of message body as <i>${values}</i> in your query"
+        },
+        "batch": {
+          "label": "Bundle results in batches",
+          "required": false,
+          "viewClass": "CheckBoxView"
         }
       }
     }
   },
   "triggers": {
     "sqlQuery": {
-      "title": "SQL Query",
+      "title": "SQL Query(depr)",
       "main": "./lib/actions/sqlQuery.js",
       "dynamicMetadata": true,
       "type": "polling",
@@ -66,6 +71,11 @@
           "viewClass": "TextAreaWithNoteView",
           "placeholder": "SELECT * FROM films WHERE title LIKE ${'%' + query + '%'}",
           "note": "You can use properties of message body as <i>${values}</i> in your insert or update or delete"
+        },
+        "batch": {
+          "label": "Bundle results in batches",
+          "required": false,
+          "viewClass": "CheckBoxView"
         }
       }
     }
