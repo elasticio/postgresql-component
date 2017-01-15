@@ -41,12 +41,29 @@ Following acitons are inside:
  * SELECT - same as above but as an action
  * INSERT/UPDATE/DELETE - this action executes the SQL query that returns no data, for example insert, delete or update. After query is executed original message will be pushed to the next component.
 
+## Authentication
+
+You would need a full PosgreSQL connection URL to connect to your database, it should looks like this:
+
+```
+postgress://username:pa$$word@your.postgresql.host:5432/dbname
+```
+
+See more in [documentation](https://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING).
+
 ## SELECT Action & Trigger
+
+This action & trigger are actually the same but can be used in two different scenarios - trigger as a first step and action in between other steps.
 
 ![image](https://cloud.githubusercontent.com/assets/56208/21964885/84f528d6-db54-11e6-94ee-ecfb6d5fbef0.png)
 
+Following configuration options are available:
+ * **SQL Query** - here you can type your SELECT query that should return 0 or more (much more) data back to you.
+ * **Bundle results in batches** - this option will influence how your results are returned to the next component.
 
 ## INSERT/UPDATE/DELETE Action
+
+This action is usefull if you want to insert, update or delete some data, returned value is ignored, number of affected rows you can see in the log file.
 
 ![image](https://cloud.githubusercontent.com/assets/56208/21964863/3dd48dde-db54-11e6-81db-41b38d7cb2bd.png)
 
