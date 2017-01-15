@@ -2,35 +2,7 @@
 
 > PostgreSQL component for the [elastic.io platform](http://www.elastic.io) that also works well with AWS Redshift
 
-This is an open source component template for working with [PostgreSQL](https://en.wikipedia.org/wiki/PostgreSQL) object-relational database management system on [elastic.io platform](http://www.elastic.io "elastic.io platform"). You can clone it and change it as you wish. However, **if you plan to deploy it into [elastic.io platform](http://www.elastic.io "elastic.io platform") you must follow sets of instructions to succeed**.
-
-## Before you Begin
-
-Before you can deploy any code into elastic.io **you must be a registered elastic.io platform user**. Please see our home page at [http://www.elastic.io](http://www.elastic.io) to learn how.
-
-We'll use git and SSH public key authentication to upload your component code, therefore you must **[upload your SSH Key](http://docs.elastic.io/docs/ssh-key)**.
-
-> If you fail to upload you SSH Key you will get **permission denied** error during the deployment.
-
-## Pushing this component in your environment
-
-After registration and uploading of your SSH Key you can proceed to deploy it into our system. At this stage we suggest you to:
-* [Create a team](http://docs.elastic.io/page/team-management) to work on your new component. This is not required but will be automatically created using random naming by our system so we suggest you name your team accordingly.
-* [Create a repository](http://docs.elastic.io/page/repository-management) where your new component is going to *reside* inside the team that you have just created.
-
-Now as you have a team name and component repository name you can add a new git remote where code shall be pushed to. It is usually displayed on the empty repository page:
-
-```bash
-$ git remote add elasticio your-team@git.elastic.io:your-repository.git
-```
-
-Obviously the naming of your team and repository is entirely up-to you and if you do not put any corresponding naming our system will auto generate it for you but the naming might not entirely correspond to your project requirements.
-
-Now we are ready to push it:
-
-```bash
-$ git push elasticio master
-```
+This is an open source component for working with [PostgreSQL](https://en.wikipedia.org/wiki/PostgreSQL) object-relational database management system on [elastic.io platform](http://www.elastic.io "elastic.io platform") it also works well with [AWS Redshift](https://aws.amazon.com/redshift/).
 
 # What's inside
 
@@ -58,14 +30,31 @@ This action & trigger are actually the same but can be used in two different sce
 ![image](https://cloud.githubusercontent.com/assets/56208/21964885/84f528d6-db54-11e6-94ee-ecfb6d5fbef0.png)
 
 Following configuration options are available:
- * **SQL Query** - here you can type your SELECT query that should return 0 or more (much more) data back to you.
- * **Bundle results in batches** - this option will influence how your results are returned to the next component.
+ * **SQL Query** - here you can type your SELECT query that should return 0 or more (much more) data back to you. There is **no limit on number of rows** returned by your SELECT queries, we will fetch results in 1000 batches and push it to the next component. You can use variables from incoming messages in the templates, see section below on how it works.
+ * **Bundle results in batches** - this option will influence how your results are returned to the next component, sometimes you would like to see and work with your results as stream (this is usefull for async processing) so that each row in your result will be placed in the individual message, however sometimes you would like to see the query result as a whole (and you don't expect too much rows as an output), then you can get all results grouped as batch (up to 1000 rows).
+
+For example you have an SQL query that returns you 400 rows, if **Bundle results in batches** is enabled you'll get a single message with array of 400 elements in it:
+
+```json
+{
+  "values" : [
+    {"id": 1...},
+    {"id": 2...}
+    ...
+  ]
+}
+```
+
+and if no records were found you'll get a message with an empty array in it. This is sometimes usefull, especially when working with request-response kind of tasks.
+
+If **Bundle results in batches** is disabled (and that's so by default) then you will get a message per resulting row, so in example above you'll get 400 messages. If query returned no data then no messages will be sent.
 
 ## INSERT/UPDATE/DELETE Action
 
 This action is usefull if you want to insert, update or delete some data, returned value is ignored, number of affected rows you can see in the log file.
 
 ![image](https://cloud.githubusercontent.com/assets/56208/21964863/3dd48dde-db54-11e6-81db-41b38d7cb2bd.png)
+
 
 ## How SQL templates work
 
