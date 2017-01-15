@@ -19,6 +19,13 @@ describe('SQL Parser', function () {
         assert.equal(result.fields.map((r) => r.value + ':' + r.type).join(','), 'id:string,name:string,url:string,phone:string');
     });
 
+    it('should parse query with *', function() {
+        var sql = "select * from films";
+        var result = utils.parseSQL(sql);
+        assert.equal(result.params.length, 0);
+        assert.equal(result.fields.length, 0);
+    });
+
     it('should produce a runnable query', function() {
         var sql = "select id,name,url,phone from companies where name = $name";
         var result = utils.parseSQL(sql);

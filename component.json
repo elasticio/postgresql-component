@@ -21,8 +21,22 @@
         "query": {
           "label": "SQL Query",
           "required": true,
-          "viewClass": "TextAreaView",
-          "default": "SELECT id:number, name, email FROM customers WHERE account_id = $accountId:string"
+          "viewClass": "TextAreaWithNoteView",
+          "default": "SELECT id:number, name, email FROM customers WHERE account_id = $accountId:string",
+          "note": "You can use <pre>parameter:type</pre> to dynamically cast results"
+        }
+      }
+    },
+    "insert" : {
+      "title": "Insert",
+      "main": "./lib/actions/insert.js",
+      "fields": {
+        "query": {
+          "label": "SQL Query",
+          "required": true,
+          "viewClass": "TextAreaWithNoteView",
+          "default": "INSERT id:number, name, email FROM customers WHERE account_id = $accountId:string",
+          "note": "Please make sure your input data has a proper "
         }
       }
     }
