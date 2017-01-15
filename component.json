@@ -56,7 +56,7 @@
       }
     },
     "selectTrigger": {
-      "title": "Select",
+      "title": "SELECT",
       "main": "./lib/actions/select.js",
       "type": "polling",
       "fields": {
