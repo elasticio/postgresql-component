@@ -55,8 +55,40 @@ This action is usefull if you want to insert, update or delete some data, return
 
 ![image](https://cloud.githubusercontent.com/assets/56208/21964863/3dd48dde-db54-11e6-81db-41b38d7cb2bd.png)
 
+Following configuration options are available:
+ * **SQL Query** - here you can type your INSERT/UPDATE/DELETE query. Returned data will be ignored, so this component will simply push original message to the next component. You can use variables from incoming messages in the templates, see section below on how it works.
 
 ## How SQL templates work
+
+SQL language is pretty extensive and complicated, so we tried to design the templating as minimum invasive so that you could express your self in SQL with maximum flexibility. Implementation of the templating is based on [prepared statement](https://www.postgresql.org/docs/9.3/static/sql-prepare.html) and hence should be safe to many SQL injection attacs. Second technology that is used here is [JavaScript template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Expression_interpolation) (we are using [this library](https://github.com/felixfbecker/node-sql-template-strings) internally) so you can even property traversal and string manipulation in the templates. Let us demonstrate how the templating works on a sample. Let's take an incoming message like this:
+
+```json
+{
+  "body": {
+    "name": "Homer Simpson",
+    "age": 38
+    "address": {
+      "street": "742 Evergreen Terrace"
+      "city": "Springfield"
+    }
+  }
+}
+```
+
+If we would like to insert it into the database, we would use following template:
+
+```
+INSERT INTO customers (name, age, address) VALUES (${name},${age},${address.street + address.city})
+```
+
+So as you can see in the example above type conversion will happen automatically and you can traverse and concatenate values.
+
+Now the SELECT example:
+
+```
+SELECT * FROM customers WHERE address LIKE ${'%' + address.city + '%'}
+```
+Same as above, concatenation and traversal in action.
 
 # Known limitations
 
