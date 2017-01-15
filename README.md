@@ -41,6 +41,17 @@ Following acitons are inside:
  * SELECT - same as above but as an action
  * INSERT/UPDATE/DELETE - this action executes the SQL query that returns no data, for example insert, delete or update. After query is executed original message will be pushed to the next component.
 
+## SELECT Action & Trigger
+
+![image](https://cloud.githubusercontent.com/assets/56208/21964885/84f528d6-db54-11e6-94ee-ecfb6d5fbef0.png)
+
+
+## INSERT/UPDATE/DELETE Action
+
+![image](https://cloud.githubusercontent.com/assets/56208/21964863/3dd48dde-db54-11e6-81db-41b38d7cb2bd.png)
+
+## How SQL templates work
+
 # Known limitations
 
 There are several limitations of the component:
