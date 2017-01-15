@@ -13,22 +13,8 @@
     }
   },
   "actions": {
-    "sqlQuery": {
-      "title": "SQL Query",
-      "main": "./lib/actions/sqlQuery.js",
-      "dynamicMetadata": true,
-      "fields": {
-        "query": {
-          "label": "SQL Query",
-          "required": true,
-          "viewClass": "TextAreaWithNoteView",
-          "default": "SELECT id:number, name, email FROM customers WHERE account_id = $accountId:string",
-          "note": "You can use <pre>parameter:type</pre> to dynamically cast results"
-        }
-      }
-    },
     "insert" : {
-      "title": "Insert",
+      "title": "INSERT/UPDATE/DELETE",
       "main": "./lib/actions/insert.js",
       "fields": {
         "query": {
@@ -37,6 +23,19 @@
           "viewClass": "TextAreaWithNoteView",
           "placeholder": "INSERT INTO films (code,title,kind) VALUES (${code},${title},${kind})",
           "note": "You can use properties of message body as <i>${values}</i> in your insert or update or delete"
+        }
+      }
+    },
+    "selectAction" : {
+      "title": "SELECT",
+      "main": "./lib/actions/select.js",
+      "fields": {
+        "query": {
+          "label": "SQL Query",
+          "required": true,
+          "viewClass": "TextAreaWithNoteView",
+          "placeholder": "SELECT * FROM films WHERE title LIKE ${'%' + query + '%'}",
+          "note": "You can use properties of message body as <i>${values}</i> in your query"
         }
       }
     }
@@ -53,6 +52,20 @@
           "required": true,
           "viewClass": "TextAreaView",
           "default": "SELECT id:number, name, email FROM customers WHERE account_id = $accountId:string"
+        }
+      }
+    },
+    "selectTrigger": {
+      "title": "Select",
+      "main": "./lib/actions/select.js",
+      "type": "polling",
+      "fields": {
+        "query": {
+          "label": "SQL Query",
+          "required": true,
+          "viewClass": "TextAreaWithNoteView",
+          "placeholder": "SELECT * FROM films WHERE title LIKE ${'%' + query + '%'}",
+          "note": "You can use properties of message body as <i>${values}</i> in your insert or update or delete"
         }
       }
     }
