@@ -35,8 +35,8 @@
           "label": "SQL Query",
           "required": true,
           "viewClass": "TextAreaWithNoteView",
-          "default": "INSERT id:number, name, email FROM customers WHERE account_id = $accountId:string",
-          "note": "Please make sure your input data has a proper "
+          "placeholder": "INSERT INTO films (code,title,kind) VALUES (${code},${title},${kind})",
+          "note": "You can use properties of message body as <i>${values}</i> in your insert or update or delete"
         }
       }
     }
