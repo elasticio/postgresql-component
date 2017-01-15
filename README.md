@@ -66,9 +66,9 @@ SQL language is pretty extensive and complicated, so we tried to design the temp
 {
   "body": {
     "name": "Homer Simpson",
-    "age": 38
+    "age": 38,
     "address": {
-      "street": "742 Evergreen Terrace"
+      "street": "742 Evergreen Terrace",
       "city": "Springfield"
     }
   }
