@@ -1,6 +1,6 @@
 # postgresql-component [![Build Status](https://travis-ci.org/elasticio/postgresql-component.svg?branch=master)](https://travis-ci.org/elasticio/postgresql-component) [![Dependency Status][daviddm-image]][daviddm-url]
 
-> PostgreSQL component for the [elastic.io platform](http://www.elastic.io)
+> PostgreSQL component for the [elastic.io platform](http://www.elastic.io) that also works well with AWS Redshift
 
 This is an open source component template for working with [PostgreSQL](https://en.wikipedia.org/wiki/PostgreSQL) object-relational database management system on [elastic.io platform](http://www.elastic.io "elastic.io platform"). You can clone it and change it as you wish. However, **if you plan to deploy it into [elastic.io platform](http://www.elastic.io "elastic.io platform") you must follow sets of instructions to succeed**.
 
@@ -12,7 +12,7 @@ We'll use git and SSH public key authentication to upload your component code, t
 
 > If you fail to upload you SSH Key you will get **permission denied** error during the deployment.
 
-## Getting Started
+## Pushing this component in your environment
 
 After registration and uploading of your SSH Key you can proceed to deploy it into our system. At this stage we suggest you to:
 * [Create a team](http://docs.elastic.io/page/team-management) to work on your new component. This is not required but will be automatically created using random naming by our system so we suggest you name your team accordingly.
@@ -32,16 +32,21 @@ Now we are ready to push it:
 $ git push elasticio master
 ```
 
-# How to use it
+# What's inside
+
+With this component you will have following trigger:
+ * SELECT - this trigger will execute an SQL query that returns multiple results, it has no limitations on the query but apparently best suited for SELECT type of queries
+
+Following acitons are inside:
+ * SELECT - same as above but as an action
+ * INSERT/UPDATE/DELETE - this action executes the SQL query that returns no data, for example insert, delete or update. After query is executed original message will be pushed to the next component.
+
+# Known limitations
 
 There are several limitations of the component:
 
-1. Only ``SELECT`` queries are currently supported
-2. Only valid ``SELECT`` queries are supported
-3. When specifying your ``SELECT`` query you may not use ``*`` like in ``SELECT * FROM foo``. You always have to specify the comma-separated list of values you want to see in response.
-4. You may augment your SQL query ``WHERE`` statement with the type information, e.g. ``SELECT a FROM foo WHERE age = $age:number``, supported type modifiers are ``number``, ``float``,``boolean`` and ``string``. When omitted ``string`` is assumed by default.
-
-![image](https://cloud.githubusercontent.com/assets/56208/14229261/b6586dfa-f92f-11e5-8489-2042dc590915.png)
+1. No transaction support
+1. We are relying on standard type default js<->postgresql data-type coercion [see here](https://github.com/brianc/node-postgres#features)
 
 If in doubt call support.
 
