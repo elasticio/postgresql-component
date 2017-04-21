@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "elasticio-node": "0.0.5",
-    "elasticio-sailor-nodejs": "1.3.0",
+    "elasticio-sailor-nodejs": "2.1.0",
     "lodash": "^4.6.1",
     "pg": "^6.1.2",
     "pg-cursor": "^1.0.1",
