@@ -26,6 +26,7 @@
     "lodash": "^4.6.1",
     "pg": "^6.1.2",
     "pg-cursor": "^1.0.1",
+    "pg-promise": "^8.5.5",
     "q": "^1.4.1",
     "sql-parser": "zubairov/sql-parser",
     "sql-template-strings": "^2.2.2"
