@@ -35,7 +35,7 @@
           "required": true,
           "viewClass": "TextAreaWithNoteView",
           "placeholder": "INSERT INTO films (code,title,kind) VALUES (${code},${title},${kind})",
-          "note": "You need use properties of message body as <i>${values}</i> in your insert"
+          "note": "You need use properties of message body as <i>${values}</i> in your  insert query"
         }
       }
     },
