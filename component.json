@@ -26,6 +26,19 @@
         }
       }
     },
+    "insertBulk" : {
+      "title": "INSERT bulk",
+      "main": "./lib/actions/insertBulk.js",
+      "fields": {
+        "query": {
+          "label": "SQL Query",
+          "required": true,
+          "viewClass": "TextAreaWithNoteView",
+          "placeholder": "INSERT INTO films (code,title,kind) VALUES (${code},${title},${kind})",
+          "note": "You need use properties of message body as <i>${values}</i> in your  insert query"
+        }
+      }
+    },
     "selectAction" : {
       "title": "SELECT",
       "main": "./lib/actions/select.js",

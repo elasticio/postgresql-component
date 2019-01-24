@@ -12,6 +12,7 @@ With this component you will have following trigger:
 Following acitons are inside:
  * SELECT - same as above but as an action
  * INSERT/UPDATE/DELETE - this action executes the SQL query that returns no data, for example insert, delete or update. After query is executed original message will be pushed to the next component.
+ * INSERT bulk - this action executes the bulk INSERT SQL query that returns no data. After query is executed original message will be pushed to the next component.
 
 ## Authentication
 
@@ -57,6 +58,33 @@ This action is usefull if you want to insert, update or delete some data, return
 
 Following configuration options are available:
  * **SQL Query** - here you can type your INSERT/UPDATE/DELETE query. Returned data will be ignored, so this component will simply push original message to the next component. You can use variables from incoming messages in the templates, see section below on how it works.
+
+## INSERT bulk Action
+
+This action is useful if you want to execute a bulk insert query in one transaction. An incoming message needs to contains a body with an array of objects.
+
+![image](https://user-images.githubusercontent.com/16806832/51680081-79093b80-1fe9-11e9-8a1e-b0bed65078cf.png)
+
+In the field `SQL Query` you need to specify a template for SQL query using properties of the message body as ${values}.
+For example, the incoming message contains the following body:
+```json
+[
+  {
+    id: 1,
+    text: 'First item'
+  },
+  {
+    id: 2,
+    text: 'Second item'
+  }
+]
+```
+You have a table called `itemstable` with fields: `id`, `text`, `createdAt`.
+For this purpose you need to specify the following SQL template:
+```$sql
+INSERT INTO itemstable(id, text, createdAt) VALUES(${id}, ${text}, current_timestamp)
+```
+If something wrong with data, all changes will rollback.
 
 ## How SQL templates work
 
