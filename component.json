@@ -56,6 +56,21 @@
           "viewClass": "CheckBoxView"
         }
       }
+    },
+    "generalSqlQuery": {
+      "title": "General Sql Query",
+      "description": "Executes a SQL query",
+      "main": "./lib/actions/generalSqlQuery.js",
+      "fields": {
+        "sql": {
+          "label": "SQL Query",
+          "required": true,
+          "viewClass": "TextAreaWithNoteView",
+          "placeholder": "INSERT INTO films (code,title,kind) VALUES (@code:number,@title:string,@kind:string)",
+          "note": "You can use parameters of message body as <i>@value:number</i> and type is <i>:type</i>"
+        }
+      },
+      "dynamicMetadata": true
     }
   },
   "triggers": {

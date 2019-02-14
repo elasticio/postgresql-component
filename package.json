@@ -21,20 +21,26 @@
     "elasticio-component"
   ],
   "dependencies": {
-    "elasticio-node": "0.0.5",
-    "elasticio-sailor-nodejs": "2.1.0",
-    "lodash": "^4.6.1",
+    "dotenv": "6.2.0",
+    "elasticio-node": "0.0.9",
+    "elasticio-sailor-nodejs": "^2.3.0",
+    "lodash": "^4.17.11",
     "pg": "^6.1.2",
     "pg-cursor": "^1.0.1",
     "pg-promise": "^8.5.5",
     "q": "^1.4.1",
+    "sinon": "7.2.3",
     "sql-parser": "zubairov/sql-parser",
     "sql-template-strings": "^2.2.2"
   },
   "devDependencies": {
-    "eslint": "^2.1.0",
-    "eslint-config-xo-space": "^0.10.0",
-    "mocha": "^2.4.5"
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "mocha": "^5.2.0",
+    "chai": "4.2.0"
   },
   "scripts": {
     "test": "mocha"
