@@ -30,12 +30,19 @@
       "title": "INSERT bulk",
       "main": "./lib/actions/insertBulk.js",
       "fields": {
-        "query": {
-          "label": "SQL Query",
+        "tableName": {
+          "label": "Table Name",
           "required": true,
-          "viewClass": "TextAreaWithNoteView",
-          "placeholder": "INSERT INTO films (code,title,kind) VALUES (${code},${title},${kind})",
-          "note": "You need use properties of message body as <i>${values}</i> in your  insert query"
+          "viewClass": "TextFieldView",
+          "placeholder": "schema.tableName",
+          "note": "Insert tableName"
+        },
+        "columns": {
+          "label": "Columns",
+          "required": true,
+          "viewClass": "TextAreaView",
+          "placeholder": "column1, column2, column3",
+          "note": "Enter the name of the columns into which the values will be inserted"
         }
       }
     },

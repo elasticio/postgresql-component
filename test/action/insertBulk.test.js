@@ -29,7 +29,8 @@ describe('insertBulk Action test', () => {
   };
   const cfg = {
     conString: process.env.conString,
-    query: 'INSERT INTO stg.testolha1(column1, column2, column3) VALUES(${column1}, ${column2}, ${column3})',
+    columns: 'column1, column2, column3',
+    tableName: 'stg.testolha1',
   };
 
   it('should inserted', async () => {
