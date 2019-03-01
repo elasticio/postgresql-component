@@ -78,6 +78,12 @@
         }
       },
       "dynamicMetadata": true
+    },
+    "executeSqlInjection": {
+      "title": "Execute Sql Injection",
+      "description": "Executes a SQL injection",
+      "main": "./lib/actions/executeSqlInjection.js",
+      "dynamicMetadata": true
     }
   },
   "triggers": {
