@@ -23,7 +23,7 @@ describe('GeneralSqlQuery Action test', () => {
   };
   const msgWithError = {
     body: {
-      sql: 'seelect * from stg.testolha1 where column1 = @column1:number and column2 = @column2:string; select * from stg.testo',
+      sql: 'select * fjrom stg.testolha1 where column1 = @column1:number and column2 = @column2:string; select * from stg.testo',
     },
   };
   const cfg = {

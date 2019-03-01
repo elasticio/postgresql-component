@@ -29,7 +29,7 @@ describe('GeneralSqlQuery Action test', () => {
 
   const cfgWithError = {
     conString: process.env.conString,
-    sql: 'selnect * from stg.testolha1 where column1 = @column1:number and column2 = @column2:string; select * from stg.testo',
+    sql: 'select * froum stg.testolha1 where column1 = @column1:number and column2 = @column2:string; select * from stg.testo',
   };
 
   it('should selected', async () => {
