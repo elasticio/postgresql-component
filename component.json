@@ -83,7 +83,17 @@
       "title": "Execute Sql Injection",
       "description": "Executes a SQL injection",
       "main": "./lib/actions/executeSqlInjection.js",
-      "dynamicMetadata": true
+      "metadata": {
+        "in": {
+          "type": "object",
+          "properties": {
+            "sql": {
+              "type": "string"
+            }
+          }
+        },
+        "out": {}
+      }
     }
   },
   "triggers": {
