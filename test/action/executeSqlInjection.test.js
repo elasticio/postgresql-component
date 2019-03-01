@@ -21,6 +21,11 @@ describe('GeneralSqlQuery Action test', () => {
       sql: 'select * from stg.testolha1 where column1 = @column1:number and column2 = @column2:string; select * from stg.testo',
     },
   };
+  const msgWithError = {
+    body: {
+      sql: 'seelect * from stg.testolha1 where column1 = @column1:number and column2 = @column2:string; select * from stg.testo',
+    },
+  };
   const cfg = {
     conString: process.env.conString,
   };
@@ -28,5 +33,10 @@ describe('GeneralSqlQuery Action test', () => {
   it('should selected', async () => {
     await generalSqlQuery.process.call(emitter, msg, cfg);
     expect(emitter.emit.calledWith('data')).to.be.equal(true);
+  });
+
+  it('should be error', async () => {
+    await generalSqlQuery.process.call(emitter, msgWithError, cfg);
+    expect(emitter.emit.calledWith('error')).to.be.equal(true);
   });
 });
