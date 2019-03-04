@@ -18,9 +18,10 @@ describe('GeneralSqlQuery Action test', () => {
   });
   const msg = {
     body: {
-      sql: 'select * from stg.testolha1 where column1 = @column1:number and column2 = @column2:string; select * from stg.testo',
+      sql: 'SELECT \'abc\' AS col1, 123 AS col2; SELECT \'def\' AS col3, 456 AS col4',
     },
   };
+  const results = [[{ col1: 'abc', col2: 123 }], [{ col3: 'def', col4: 456 }]];
   const msgWithError = {
     body: {
       sql: 'select * fjrom stg.testolha1 where column1 = @column1:number and column2 = @column2:string; select * from stg.testo',
@@ -33,6 +34,7 @@ describe('GeneralSqlQuery Action test', () => {
   it('should selected', async () => {
     await generalSqlQuery.process.call(emitter, msg, cfg);
     expect(emitter.emit.calledWith('data')).to.be.equal(true);
+    expect(emitter.emit.args[0][1].body).to.deep.equal(results);
   });
 
   it('should be error', async () => {

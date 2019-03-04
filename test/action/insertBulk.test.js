@@ -18,23 +18,22 @@ describe('insertBulk Action test', () => {
   });
   const msg = {
     body: [{
-      column1: 7,
-      column2: 'HelloFromBulk',
-      column3: 'Inserted',
+      col0: 1111117,
+      col1: 'HelloFromBulk111',
     }, {
-      column1: 8,
-      column2: 'HelloFromBulk!',
-      column3: 'InsertedOk',
+      col0: 1111118,
+      col1: 'HelloFromBulk!111',
     }],
   };
   const cfg = {
     conString: process.env.conString,
-    columns: 'column1, column2, column3',
-    tableName: 'stg.testolha1',
+    columns: 'col0, col1',
+    tableName: 'bulk_insert_test',
   };
 
   it('should inserted', async () => {
     await insertBulk.process.call(emitter, msg, cfg);
     expect(emitter.emit.calledWith('data')).to.be.equal(true);
+    expect(emitter.emit.args[0][1].body).to.deep.equal(msg.body);
   });
 });
