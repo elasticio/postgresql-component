@@ -19,7 +19,7 @@ describe('Metadata test', () => {
               type: 'string',
             },
             favorited: {
-              type: 'string',
+              type: 'boolean',
             },
             id: {
               type: 'number',
@@ -103,7 +103,7 @@ describe('Metadata test', () => {
               type: 'string',
             },
             favorited: {
-              type: 'string',
+              type: 'boolean',
             },
             id: {
               type: 'number',

@@ -103,7 +103,7 @@ describe('Prepare query string', () => {
   });
 
   it('Should return Error', () => {
-    const sql = 'seelect * from stg.testTable1';
+    const sql = 'drop * from stg.testTable1';
     const body = {
       column1: 5,
       column2: 7,
@@ -111,7 +111,7 @@ describe('Prepare query string', () => {
     try {
       utils.prepareQuery(sql, body);
     } catch (error) {
-      expect(error.toString()).to.equal('Error: The SQL query contains command from Black list');
+      expect(error.toString()).to.equal('Error: DROP and ALTER commands are not allowed to execute');
     }
   });
 });

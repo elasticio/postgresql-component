@@ -63,10 +63,26 @@ Following configuration options are available:
 
 This action is useful if you want to execute a bulk insert query in one transaction. An incoming message needs to contains a body with an array of objects.
 
-![image](https://user-images.githubusercontent.com/16806832/51680081-79093b80-1fe9-11e9-8a1e-b0bed65078cf.png)
+### Configuration field
 
-In the field `SQL Query` you need to specify a template for SQL query using properties of the message body as ${values}.
-For example, the incoming message contains the following body:
+![image](https://user-images.githubusercontent.com/16806832/53736488-8c35e380-3e92-11e9-8975-7bf41742c160.png)
+
+#### Table Name
+
+You need to put into field **Table Name** the name of the table in which you want to put multiple values.
+
+#### Columns
+
+You need to determine the name of the columns in which the corresponding values will be inserted.
+
+The incoming message needs to contain the body with an array of objects. 
+Each object needs to contain values will be inserted in corresponding columns.
+
+For example, you need to execute following query:
+```$sql
+INSERT INTO itemstable(id, text) VALUES (1, 'First item'), (2, 'Second item')
+```
+You need specify field  **Table Name** = 'itemstable', **Columns** = 'id, text' and the incoming message needs to be:
 ```json
 [
   {
@@ -79,12 +95,114 @@ For example, the incoming message contains the following body:
   }
 ]
 ```
-You have a table called `itemstable` with fields: `id`, `text`, `createdAt`.
-For this purpose you need to specify the following SQL template:
-```$sql
-INSERT INTO itemstable(id, text, createdAt) VALUES(${id}, ${text}, current_timestamp)
-```
 If something wrong with data, all changes will rollback.
+
+## General Sql Query Action
+
+**Expert mode**. You can execute SQL query or SQL script in this action.
+
+### Configuration field
+
+#### SQL Query 
+Put your SQL expression to `SQL Query` for further execution.
+You can put only one SQL query or several queries with delimiter `;`.
+All queries are executed in one transaction if something wrong with one of execution, all changes will rollback.
+Also if you want use prepared statements in your query,
+you need define prepared statement variables like thi way `sqlVariableName = @MetadataVariableName:type` where:
+1. `sqlVariableName` - variable name in sql expression;
+2. `MetadataVariableName` - variable name in metadata (it can be the same as `sqlVariableName`);
+3. `type` - type of variable , following types are supported:
+   * string (also default type if type is omitted)
+   * number 
+   * boolean 
+   
+For example, for sql expression `SELECT * FROM tableName WHERE column1 = 'text' AND column2 = 15` you need use following template:
+`SELECT * FROM tableName WHERE column1 = @column1:string AND column2 = @column2:number` and put values into generated metadata.
+
+![image](https://user-images.githubusercontent.com/16806832/53731432-635a2200-3e83-11e9-9a4e-0fc26aeeb001.png)
+
+### Input metadata
+Input metadata is generated from `SQL Query` configuration field if this field contains at list one defined value.
+
+### Output metadata
+
+Output metadata is an array of arrays with the result of query execution and depends on the count of SQL queries which were executed. 
+If execution does not return any results, there is an empty array in output metadata. 
+For example, for sql script:
+```$xslt
+INSERT INTO tableOne (column1, column2) VALUES ('value1', 'value2');
+SELECT * FROM table2;
+```
+the first sql query `INSERT INTO tableOne (column1, column2) VALUES ('value1', 'value2')` does not return any values and
+the second sql query `SELECT * FROM table2` returns two records.
+Output metadata for this example is:
+
+```$xslt
+[
+  [],
+  [
+    {
+      "col2": 123,
+      "col1": "abc"
+    },
+    {
+      "col2": 456,
+      "col1": "def"
+    }
+  ]
+]
+``` 
+
+## Execute Sql Injection
+
+**Expert mode**. You can execute Sql Injection in this action.
+You can not use prepare statement there, for this purpose use **General Sql Query Action**.
+
+### Input metadata
+
+Input metadata contains one field `Sql Injection string`. You can put there SQL query, SQL script or set SQL query from the previous step.
+You can put only one SQL query or several queries with delimiter `;`.
+All queries are executed in one transaction if something wrong with one of execution, all changes will rollback.
+For example, you have some file with defined SQL script and want to execute this. You need to use some component
+which can read this file on the previous step and return value like this:
+```$xslt
+  {
+    "query_string": "INSERT INTO tableOne (column1, column2) VALUES ('value1', 'value2'); SELECT * FROM table2"
+  }
+```
+and in this action you need put `query_string` (or some JSONata expression) to `Sql Injection string`:
+
+![image](https://user-images.githubusercontent.com/16806832/53736167-a02d1580-3e91-11e9-93dd-84c0048f72d2.png)
+
+### Output metadata
+
+Output metadata is an array of arrays with the result of query execution and depends on the count of SQL queries which were executed. 
+If execution does not return any results, there is an empty array in output metadata. 
+For example, for sql script:
+```$xslt
+INSERT INTO tableOne (column1, column2) VALUES ('value1', 'value2');
+SELECT * FROM table2;
+```
+the first sql query `INSERT INTO tableOne (column1, column2) VALUES ('value1', 'value2')` does not return any values and
+the second sql query `SELECT * FROM table2` returns two records.
+Output metadata for this example is:
+
+```$xslt
+[
+  [],
+  [
+    {
+      "col2": 123,
+      "col1": "abc"
+    },
+    {
+      "col2": 456,
+      "col1": "def"
+    }
+  ]
+]
+``` 
+
 
 ## How SQL templates work
 
