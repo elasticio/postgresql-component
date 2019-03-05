@@ -1,6 +1,6 @@
 const assert = require('assert');
 const { expect } = require('chai');
-const utils = require('../lib/utils.js');
+const utils = require('../../lib/utils.js');
 
 describe('SQL Parser', () => {
   it('should parse complex statement', () => {

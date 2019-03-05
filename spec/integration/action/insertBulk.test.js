@@ -3,7 +3,7 @@ const fs = require('fs');
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const insertBulk = require('../../lib/actions/insertBulk');
+const insertBulk = require('../../../lib/actions/insertBulk');
 
 let emitter;
 

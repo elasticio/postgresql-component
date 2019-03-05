@@ -3,7 +3,7 @@ const fs = require('fs');
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const generalSqlQuery = require('../../lib/actions/generalSqlQuery');
+const generalSqlQuery = require('../../../lib/actions/generalSqlQuery');
 
 let emitter;
 

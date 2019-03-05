@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 const { expect } = require('chai');
-const action = require('../lib/actions/generalSqlQuery');
+const action = require('../../lib/actions/generalSqlQuery');
 
 describe('Metadata test', () => {
   const cfg = {
