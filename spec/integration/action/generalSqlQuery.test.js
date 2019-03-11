@@ -32,7 +32,7 @@ describe('GeneralSqlQuery Action test', () => {
     sql: 'select * froum stg.testolha1 where column1 = @column1:number and column2 = @column2:string; select * from stg.testo',
   };
 
-  const results = [
+  const result = [
     [
       {
         col1: 'abc',
@@ -50,7 +50,7 @@ describe('GeneralSqlQuery Action test', () => {
   it('should selected', async () => {
     await generalSqlQuery.process.call(emitter, msg, cfg);
     expect(emitter.emit.calledWith('data')).to.be.equal(true);
-    expect(emitter.emit.args[0][1].body).to.deep.equal(results);
+    expect(emitter.emit.args[0][1].body).to.deep.equal({ result });
   });
 
   it('should be error', async () => {

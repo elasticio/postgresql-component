@@ -163,4 +163,12 @@ describe('Prepare array of query string', () => {
     const result = utils.prepareQueries(sql, body);
     expect(result).to.deep.equal([sql]);
   });
+
+
+  it('Should remove comments', () => {
+    const sql = 'select * from  /*Hello*/ stg.testTable1 --comments';
+    const preparedSql = ['select * from stg.testTable1'];
+    const result = utils.prepareQueries(sql, {});
+    expect(result).to.deep.equal(preparedSql);
+  });
 });

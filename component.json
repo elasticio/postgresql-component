@@ -13,29 +13,17 @@
     }
   },
   "actions": {
-    "insert" : {
-      "title": "INSERT/UPDATE/DELETE",
-      "main": "./lib/actions/insert.js",
-      "fields": {
-        "query": {
-          "label": "SQL Query",
-          "required": true,
-          "viewClass": "TextAreaWithNoteView",
-          "placeholder": "INSERT INTO films (code,title,kind) VALUES (${code},${title},${kind})",
-          "note": "You can use properties of message body as <i>${values}</i> in your insert or update or delete"
-        }
-      }
-    },
     "insertBulk" : {
-      "title": "INSERT bulk",
+      "title": "INSERT Bulk",
       "main": "./lib/actions/insertBulk.js",
+      "description": "Insert multiple rows specified in incoming message in defined columns in a single table",
       "fields": {
         "tableName": {
           "label": "Table Name",
           "required": true,
           "viewClass": "TextFieldView",
           "placeholder": "schema.tableName",
-          "note": "Insert tableName"
+          "note": "Enter the name of the table into which the values will be inserted"
         },
         "columns": {
           "label": "Columns",
@@ -46,9 +34,24 @@
         }
       }
     },
+    "insert" : {
+      "title": "INSERT/UPDATE/DELETE",
+      "main": "./lib/actions/insert.js",
+      "description": "INSERT or UPDATE or DELETE SQL Query",
+      "fields": {
+        "query": {
+          "label": "SQL Query",
+          "required": true,
+          "viewClass": "TextAreaWithNoteView",
+          "placeholder": "INSERT INTO films (code,title,kind) VALUES (${code},${title},${kind})",
+          "note": "You can use properties of message body as <i>${values}</i> in your insert or update or delete"
+        }
+      }
+    },
     "selectAction" : {
       "title": "SELECT",
       "main": "./lib/actions/select.js",
+      "description": "SELECT SQL Query",
       "fields": {
         "query": {
           "label": "SQL Query",
@@ -64,24 +67,9 @@
         }
       }
     },
-    "generalSqlQuery": {
-      "title": "General Sql Query",
-      "description": "Executes a SQL query",
-      "main": "./lib/actions/generalSqlQuery.js",
-      "fields": {
-        "sql": {
-          "label": "SQL Query",
-          "required": true,
-          "viewClass": "TextAreaWithNoteView",
-          "placeholder": "INSERT INTO films (code,title,kind) VALUES (@code:number,@title:string,@kind:string)",
-          "note": "You can use parameters of message body as <i>@value:number</i> and type is <i>:type</i>"
-        }
-      },
-      "dynamicMetadata": true
-    },
     "executeSqlInjection": {
-      "title": "Execute Sql Injection",
-      "description": "Executes a SQL injection",
+      "title": "SQL Injection",
+      "description": "Executes a SQL Injection. Warning: should be used with caution!",
       "main": "./lib/actions/executeSqlInjection.js",
       "metadata": {
         "in": {
@@ -96,27 +84,29 @@
         },
         "out": {}
       }
+    },
+    "generalSqlQuery": {
+      "title": "SQL Query",
+      "description": "Executes a SQL Query. Warning: should be used with caution!",
+      "main": "./lib/actions/generalSqlQuery.js",
+      "fields": {
+        "sql": {
+          "label": "SQL Query",
+          "required": true,
+          "viewClass": "TextAreaWithNoteView",
+          "placeholder": "INSERT INTO films (code,title,kind) VALUES (@code:number,@title:string,@kind:string)",
+          "note": "You can use parameters of message body as <i>@value:number</i> and type is <i>:type</i>"
+        }
+      },
+      "dynamicMetadata": true
     }
   },
   "triggers": {
-    "sqlQuery": {
-      "title": "SQL Query(depr)",
-      "main": "./lib/actions/sqlQuery.js",
-      "dynamicMetadata": true,
-      "type": "polling",
-      "fields": {
-        "query": {
-          "label": "SQL Query",
-          "required": true,
-          "viewClass": "TextAreaView",
-          "default": "SELECT id:number, name, email FROM customers WHERE account_id = $accountId:string"
-        }
-      }
-    },
     "selectTrigger": {
       "title": "SELECT",
       "main": "./lib/actions/select.js",
       "type": "polling",
+      "description": "SELECT SQL Query",
       "fields": {
         "query": {
           "label": "SQL Query",
@@ -129,6 +119,22 @@
           "label": "Bundle results in batches",
           "required": false,
           "viewClass": "CheckBoxView"
+        }
+      }
+    },
+    "sqlQuery": {
+      "title": "SQL Query",
+      "deprecated": true,
+      "main": "./lib/actions/sqlQuery.js",
+      "description": "Custom SQL Query",
+      "dynamicMetadata": true,
+      "type": "polling",
+      "fields": {
+        "query": {
+          "label": "SQL Query",
+          "required": true,
+          "viewClass": "TextAreaView",
+          "default": "SELECT id:number, name, email FROM customers WHERE account_id = $accountId:string"
         }
       }
     }
