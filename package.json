@@ -43,7 +43,7 @@
     "chai": "4.2.0"
   },
   "scripts": {
-    "test": "npm run unit-test && npm run integration-test",
+    "test": "npm run unit-test",
     "unit-test": "mocha spec/unit --recursive --timeout 50000",
     "integration-test": "mocha spec/integration --recursive --timeout 50000"
   },
