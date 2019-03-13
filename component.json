@@ -32,6 +32,19 @@
           "placeholder": "column1, column2, column3",
           "note": "Enter the name of the columns into which the values will be inserted"
         }
+      },
+      "metadata": {
+        "in": {
+          "type": "object",
+          "properties": {
+            "values": {
+              "type": "array",
+              "required": true,
+              "title": "Values"
+            }
+          }
+        },
+        "out": {}
       }
     },
     "insert" : {

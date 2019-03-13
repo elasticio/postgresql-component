@@ -17,13 +17,15 @@ describe('insertBulk Action test', () => {
     };
   });
   const msg = {
-    body: [{
-      col0: 1111117,
-      col1: 'HelloFromBulk111',
-    }, {
-      col0: 1111118,
-      col1: 'HelloFromBulk!111',
-    }],
+    body: {
+      values: [{
+        col0: 1111117,
+        col1: 'HelloFromBulk111',
+      }, {
+        col0: 1111118,
+        col1: 'HelloFromBulk!111',
+      }],
+    },
   };
   const cfg = {
     conString: process.env.conString,
