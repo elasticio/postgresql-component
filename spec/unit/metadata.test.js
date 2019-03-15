@@ -45,7 +45,6 @@ describe('Metadata test', () => {
           },
           type: 'object',
         },
-        out: {},
       });
       done();
     });
@@ -59,7 +58,6 @@ describe('Metadata test', () => {
           properties: {},
           type: 'object',
         },
-        out: {},
       });
       done();
     });
@@ -82,7 +80,6 @@ describe('Metadata test', () => {
             },
           },
         },
-        out: {},
       });
       done();
     });
@@ -129,7 +126,6 @@ describe('Metadata test', () => {
           },
           type: 'object',
         },
-        out: {},
       });
       done();
     });
