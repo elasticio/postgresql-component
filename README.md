@@ -27,7 +27,7 @@ postgress://username:pa$$word@your.postgresql.host:5432/dbname
 
 See more in [documentation](https://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING).
 
-## SELECT Action & Trigger
+## SELECT Action & Trigger  
 
 This action & trigger are actually the same but can be used in two different scenarios - trigger as a first step and action in between other steps.
 

@@ -36,6 +36,6 @@ describe('insertBulk Action test', () => {
   it('should inserted', async () => {
     await insertBulk.process.call(emitter, msg, cfg);
     expect(emitter.emit.calledWith('data')).to.be.equal(true);
-    expect(emitter.emit.args[0][1].body).to.deep.equal(msg.body);
+    expect(emitter.emit.args[0][1].body).to.deep.equal({ result: 'Ok' });
   });
 });
