@@ -12,9 +12,9 @@ With this component you will have following trigger:
 Following acitons are inside:
  * SELECT - same as above but as an action
  * INSERT/UPDATE/DELETE - this action executes the SQL query that returns no data, for example insert, delete or update. After query is executed original message will be pushed to the next component.
- * INSERT bulk - this action executes the bulk INSERT SQL query that returns no data. After query is executed original message will be pushed to the next component.
- * General Sql Query - **Expert mode.** this action executes the SQL query or SQL script with prepared statements and returns an array of results of execution each query. 
- * Execute Sql Injection - **Expert mode.** this action executes the SQL query or SQL script without prepared statements and returns an array of results of execution each query.
+ * INSERT Bulk - this action executes the bulk INSERT SQL query and returns execution result. 
+ * SQL Injection - **Expert mode.** this action executes the SQL query or SQL script without prepared statements and returns an array of results of execution each query.
+ * SQL Query - **Expert mode.** this action executes the SQL query or SQL script with prepared statements and returns an array of results of execution each query. 
  JSONana expression can be used as a source of SQL query. 
 
 ## Authentication
@@ -53,6 +53,10 @@ and if no records were found you'll get a message with an empty array in it. Thi
 
 If **Bundle results in batches** is disabled (and that's so by default) then you will get a message per resulting row, so in example above you'll get 400 messages. If query returned no data then no messages will be sent.
 
+### Known limitations
+
+SELECT Action & Trigger does not support transactions.
+
 ## INSERT/UPDATE/DELETE Action
 
 This action is useful if you want to insert, update or delete some data, returned value is ignored, number of affected rows you can see in the log file.
@@ -62,11 +66,15 @@ This action is useful if you want to insert, update or delete some data, returne
 Following configuration options are available:
  * **SQL Query** - here you can type your INSERT/UPDATE/DELETE query. Returned data will be ignored, so this component will simply push original message to the next component. You can use variables from incoming messages in the templates, see section below on how it works.
 
-## INSERT bulk Action
+### Known limitations
+
+Action does not support transactions.
+
+## INSERT Bulk Action
 
 This action is useful to execute a bulk insert query in one transaction. An incoming message needs to contain a body with an array of objects.
 
-### Configuration field
+### Configuration field 
 
 ![image](https://user-images.githubusercontent.com/16806832/53736488-8c35e380-3e92-11e9-8975-7bf41742c160.png)
 
@@ -78,14 +86,15 @@ You need to put the name of the table into field **Table Name** where you want t
 
 You need to determine the name of the columns in which corresponding values will be inserted.
 
-The incoming message needs to contain the body with an array of objects. 
-Each object needs to contain values that will be inserted in corresponding columns.
+### Input metadata
+
+**Values** - needs to contain an array of objects, each object needs to contain values that will be inserted in corresponding columns.
 
 For example, you need to execute following query:
 ```$sql
 INSERT INTO itemstable(id, text) VALUES (1, 'First item'), (2, 'Second item')
 ```
-You need specify field  **Table Name** = 'itemstable', **Columns** = 'id, text' and the incoming message needs to be:
+You need specify field  **Table Name** = 'itemstable', **Columns** = 'id, text' and **Values** needs to be:
 ```json
 [
   {
@@ -109,7 +118,7 @@ All changes will rollback, if something wrong with data.
 #### SQL Query 
 Put your SQL expression to `SQL Query` for further execution.
 You can put only one SQL query or several queries with delimiter `;`.
-All queries are executed in one transaction. All changes will rollback, if something wrong with one of execution.
+All queries are executed in one transaction. All changes will rollback if something wrong with one of the executions.
 Also if you want to use prepared statements in your query,
 you need define prepared statement variables like this way `sqlVariableName = @MetadataVariableName:type` where:
 1. `sqlVariableName` - variable name in sql expression;
@@ -125,7 +134,7 @@ For example, for sql expression `SELECT * FROM tableName WHERE column1 = 'text' 
 ![image](https://user-images.githubusercontent.com/16806832/53731432-635a2200-3e83-11e9-9a4e-0fc26aeeb001.png)
 
 ### Input metadata
-Input metadata is generated from `SQL Query` configuration field if this field contains at list one defined value.
+Input metadata is generated from `SQL Query` configuration field if this field contains at least one defined value.
 
 ### Output metadata
 
@@ -165,7 +174,7 @@ You can not use prepare statement there, for this purpose use **General Sql Quer
 
 Input metadata contains one field `Sql Injection string`. You can put there SQL query, SQL script or set of SQL queries from the previous step.
 You can put only one SQL query or several queries with delimiter `;`.
-All queries are executed in one transaction. All changes will rollback, if something wrong with one of execution.
+All queries are executed in one transaction. All changes will rollback if something wrong with one of the executions.
 For example, you have some file with defined SQL script and want to execute this. You need to use some component
 which can read this file on the previous step and return value like this:
 ```$xslt
@@ -243,7 +252,6 @@ Same as above, concatenation and traversal in action.
 
 There are several limitations of the component:
 
-1. No transaction support
 1. We are relying on standard type default js<->postgresql data-type coercion [see here](https://github.com/brianc/node-postgres#features)
 
 If in doubt call support.

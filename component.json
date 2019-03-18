@@ -16,7 +16,7 @@
     "insertBulk" : {
       "title": "INSERT Bulk",
       "main": "./lib/actions/insertBulk.js",
-      "description": "Insert multiple rows specified in incoming message in defined columns in a single table",
+      "description": "Insert multiple rows specified at the field <i>Values<i> to defined columns into a single table",
       "fields": {
         "tableName": {
           "label": "Table Name",
@@ -57,7 +57,7 @@
           "required": true,
           "viewClass": "TextAreaWithNoteView",
           "placeholder": "INSERT INTO films (code,title,kind) VALUES (${code},${title},${kind})",
-          "note": "You can use properties of message body as <i>${values}</i> in your insert or update or delete"
+          "note": "You can use properties of message body as ${values} in your insert or update or delete query"
         }
       }
     },
