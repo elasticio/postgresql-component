@@ -16,7 +16,7 @@
     "insertBulk" : {
       "title": "INSERT Bulk",
       "main": "./lib/actions/insertBulk.js",
-      "description": "Insert multiple rows specified at the field <i>Values<i> to defined columns into a single table",
+      "description": "Insert multiple rows specified at the field Values to defined columns into a single table",
       "fields": {
         "tableName": {
           "label": "Table Name",
