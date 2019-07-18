@@ -92,6 +92,11 @@
               "type": "string",
               "required": true,
               "title": "Enter Sql Injection string"
+            },
+            "retriesLeft": {
+              "type": "number",
+              "required": false,
+              "title": "Number of retries in case of deadlock transaction"
             }
           }
         },
