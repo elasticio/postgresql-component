@@ -82,7 +82,7 @@
     },
     "executeSqlInjection": {
       "title": "SQL Injection",
-      "description": "Executes a SQL Injection. Warning: should be used with caution!",
+      "description": "Perform Action/Evaluate Function. Warning: should be used with caution!",
       "main": "./lib/actions/executeSqlInjection.js",
       "metadata": {
         "in": {
@@ -91,7 +91,7 @@
             "sql": {
               "type": "string",
               "required": true,
-              "title": "Enter Sql Injection string"
+              "title": "SQL Expression"
             },
             "retriesLeft": {
               "type": "number",
@@ -105,7 +105,7 @@
     },
     "generalSqlQuery": {
       "title": "SQL Query",
-      "description": "Executes a SQL Query. Warning: should be used with caution!",
+      "description": "Execute Query or Statement in Query Language. Warning: should be used with caution!",
       "main": "./lib/actions/generalSqlQuery.js",
       "fields": {
         "sql": {

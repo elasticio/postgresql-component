@@ -1,11 +1,10 @@
-/* eslint-disable global-require,no-plusplus,no-unused-vars */
+/* eslint-disable global-require,no-plusplus,no-unused-vars,no-multi-str */
 const fs = require('fs');
 const { expect } = require('chai');
 const sinon = require('sinon');
-const clientPgPromise = require('../../../lib/clientPgPromise');
-const utils = require('../../../lib/utils');
-
+const pgp = require('pg-promise');
 const generalSqlQuery = require('../../../lib/actions/executeSqlInjection');
+const clientPgPromise = require('../../../lib/clientPgPromise');
 
 let emitter;
 
@@ -14,27 +13,116 @@ describe('GeneralSqlQuery Action test', function () {
   if (fs.existsSync('.env')) {
     require('dotenv').config();
   }
+
+  before(async () => {
+    const cfg = {
+      conString: process.env.conString,
+    };
+
+    const msgCreateTable = {
+      body: {
+        sql: 'CREATE TABLE IF NOT EXISTS public.test(id SERIAL PRIMARY KEY, val TEXT);',
+      },
+    };
+
+    const msgCreateFunction = {
+      body: {
+        sql: 'CREATE OR REPLACE FUNCTION f_test(v TEXT)\
+                             RETURNS INTEGER LANGUAGE SQL SECURITY DEFINER SET search_path = postgres,pg_temp as $$\
+                             LOCK test IN EXCLUSIVE MODE;\
+                             INSERT INTO public.test(val) SELECT v WHERE NOT EXISTS(\
+                               SELECT * FROM public.test WHERE val=v\
+                             );\
+                             SELECT id FROM public.test WHERE val=v;\
+                             $$;',
+      },
+    };
+
+    const db = clientPgPromise.getDb(cfg);
+
+    db.tx((t) => {
+      return t.batch([msgCreateTable.sql]);
+    }).then((data) => {
+      console.log('Table was created successfully');
+      return data;
+    }).catch((error) => {
+      console.log('Error:', error.message || error);
+    });
+
+    db.tx((t) => {
+      return t.batch([msgCreateFunction.sql]);
+    }).then((data) => {
+      console.log('Table was created successfully');
+      return data;
+    }).catch((error) => {
+      console.log('Error:', error.message || error);
+    });
+  });
+
   beforeEach(() => {
     emitter = {
       emit: sinon.spy(),
     };
   });
+
+  after(() => {
+    const cfg = {
+      conString: process.env.conString,
+    };
+
+    const msgDeleteTable = {
+      body: {
+        sql: 'DROP TABLE IF EXISTS public.test;',
+      },
+    };
+
+    const msgDeleteFunction = {
+      body: {
+        sql: 'DROP FUNCTION IF EXISTS f_test(v TEXT);',
+      },
+    };
+
+    const db = clientPgPromise.getDb(cfg);
+
+    db.tx((t) => {
+      return t.batch([msgDeleteTable.sql]);
+    }).then((data) => {
+      console.log('Table was deleted successfully');
+      return data;
+    }).catch((error) => {
+      console.log('Error:', error.message || error);
+    });
+
+    db.tx((t) => {
+      return t.batch([msgDeleteFunction.sql]);
+    }).then((data) => {
+      console.log('Table was deleted successfully');
+      return data;
+    }).catch((error) => {
+      console.log('Error:', error.message || error);
+    });
+  });
+
   const msg = {
     body: {
       sql: 'SELECT \'abc\' AS col1, 123 AS col2; SELECT \'def\' AS col3, 456 AS col4',
     },
   };
+
   const result = [[{ col1: 'abc', col2: 123 }], [{ col3: 'def', col4: 456 }]];
+
   const msgWithError = {
     body: {
       sql: 'select * fjrom stg.testolha1 where column1 = @column1:number and column2 = @column2:string; select * from stg.testo',
     },
   };
+
   const msgWithDeadlock = {
     body: {
       sql: 'select f_test(\'blah\');',
     },
   };
+
   const cfg = {
     conString: process.env.conString,
   };
