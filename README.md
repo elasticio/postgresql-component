@@ -198,6 +198,7 @@ and in this action you need put `query_string` (or some JSONata expression) to `
 #### Number of retries in case of deadlock transaction
 You can specify maximum number of retries, that is intended to help to solve lock's issues in case of a deadlock transaction.
 The delay between retries is 1 second.
+Default value for this configuration field is `0`, it means, that such behavior is switched off (by default) and no any retry will be performed in case of deadlocked transaction. 
 
 ### Output metadata
 
