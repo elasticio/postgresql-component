@@ -13,9 +13,13 @@ Following acitons are inside:
  * SELECT - same as above but as an action
  * INSERT/UPDATE/DELETE - this action executes the SQL query that returns no data, for example insert, delete or update. After query is executed original message will be pushed to the next component.
  * INSERT Bulk - this action executes the bulk INSERT SQL query and returns execution result. 
- * SQL Injection - **Expert mode.** this action executes the SQL query or SQL script without prepared statements and returns an array of results of execution each query.
- * SQL Query - **Expert mode.** this action executes the SQL query or SQL script with prepared statements and returns an array of results of execution each query. 
+ * SQL Injection - **Expert mode.** This action executes the SQL query or SQL script without prepared statements and returns an array of results of execution each query.
+ * SQL Query - **Expert mode.** This action executes the SQL query or SQL script with prepared statements and returns an array of results of execution each query. 
  JSONana expression can be used as a source of SQL query. 
+
+### Completeness Matrix
+![image](https://user-images.githubusercontent.com/40201204/61518227-bb985780-aa11-11e9-9d18-d2a9c3cc3e65.png)
+[PostgreSQL Component Completeness Matrix](https://drive.google.com/open?id=1XQGqPAGUmT31EN1XRrk2iqRlPoqj5pi6E4KvsA7bayU)
 
 ## Authentication
 
@@ -172,7 +176,12 @@ You can not use prepare statement there, for this purpose use **General Sql Quer
 
 ### Input metadata
 
-Input metadata contains one field `Sql Injection string`. You can put there SQL query, SQL script or set of SQL queries from the previous step.
+Input metadata contains two fields: 
+* `SQL Expression`;
+* `Number of retries in case of deadlock transaction`.
+
+#### SQL Expression
+You can put there SQL query, SQL script or set of SQL queries from the previous step.
 You can put only one SQL query or several queries with delimiter `;`.
 All queries are executed in one transaction. All changes will rollback if something wrong with one of the executions.
 For example, you have some file with defined SQL script and want to execute this. You need to use some component
@@ -184,7 +193,12 @@ which can read this file on the previous step and return value like this:
 ```
 and in this action you need put `query_string` (or some JSONata expression) to `Sql Injection string`:
 
-![image](https://user-images.githubusercontent.com/16806832/53736167-a02d1580-3e91-11e9-93dd-84c0048f72d2.png)
+![image](https://user-images.githubusercontent.com/40201204/61515864-470eea00-aa0c-11e9-837b-4cb24e88f512.png)
+
+#### Number of retries in case of deadlock transaction
+You can specify maximum number of retries, that is intended to help to solve lock's issues in case of a deadlock transaction.
+The delay between retries is 1 second.
+Default value for this configuration field is `0`, it means, that such behavior is switched off (by default) and no any retry will be performed in case of deadlocked transaction. 
 
 ### Output metadata
 
