@@ -113,7 +113,7 @@ You need specify field  **Table Name** = 'itemstable', **Columns** = 'id, text' 
 ```
 All changes will rollback, if something wrong with data.
 
-## General Sql Query Action
+## SQL Query Action
 
 **Expert mode**. You can execute SQL query or SQL script in this action.
 
@@ -169,7 +169,7 @@ Output metadata for this example is:
 ]
 ``` 
 
-## Execute Sql Injection
+## SQL Injection
 
 **Expert mode**. You can execute Sql Injection in this action.
 You can not use prepare statement there, for this purpose use **General Sql Query Action**.
