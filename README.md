@@ -193,7 +193,7 @@ which can read this file on the previous step and return value like this:
 ```
 and in this action you need put `query_string` (or some JSONata expression) to `Sql Injection string`:
 
-![image](https://user-images.githubusercontent.com/40201204/61515864-470eea00-aa0c-11e9-837b-4cb24e88f512.png)
+![image](https://user-images.githubusercontent.com/40201204/62026183-f3a65400-b1e2-11e9-988a-db689dd33a95.png)
 
 #### Number of retries in case of deadlock transaction
 You can specify maximum number of retries, that is intended to help to solve lock's issues in case of a deadlock transaction.
