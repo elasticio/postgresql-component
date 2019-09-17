@@ -1,6 +1,3 @@
-/* eslint-disable eol-last */
-/* eslint-disable no-unused-vars */
-const pg = require('pg');
 const fs = require('fs');
 const { expect } = require('chai');
 const sinon = require('sinon');
@@ -8,6 +5,7 @@ const sinon = require('sinon');
 const query = require('../../../lib/actions/insert');
 
 if (fs.existsSync('.env')) {
+  // eslint-disable-next-line global-require
   require('dotenv').config();
 }
 
@@ -20,28 +18,11 @@ const msg = {
   body: '',
 };
 
-const result = [
-  [{
-    col1: 'hello',
-    col2: 'world',
-  }],
-];
-
-// const client = new pg.Client({
-//   host: 'testdb.mochelasticio.org:5432',
-//   username: 'elasticio',
-//   password: '2uDyG4hHxR',
-//   database: 'elasticio_testdb',
-// });
-
 describe('Tests INSERT, UPDATE, DELETE FROM actions', () => {
   const emitter = { emit: sinon.spy() };
-  const connectSpy = sinon.stub(pg, 'connect');
-  //const callbackClient = sinon.stub(connectSpy.client, 'query').yieldTo('');
 
   beforeEach(() => {
     emitter.emit.resetHistory();
-    connectSpy.resetHistory();
   });
 
   it('Initial condition', async () => {
@@ -52,26 +33,42 @@ describe('Tests INSERT, UPDATE, DELETE FROM actions', () => {
     cfg.query = 'INSERT INTO employee VALUES (1111, \'hello\', \'world\', \'IT\')';
     await query.process.call(emitter, msg, cfg);
     expect(emitter.emit.calledOnce).to.be.equal(true);
+    expect(emitter.emit.args[0][0]).to.be.equal('data');
   });
 
   it('Should fail to insert if the item already exists', async () => {
     await query.process.call(emitter, msg, cfg);
-    // expect(emitter.emit.called).to.be.equal(true);
+    expect(emitter.emit.calledOnce).to.be.equal(true);
+    expect(emitter.emit.args[0][0]).to.be.equal('error');
+    expect(emitter.emit.args[0][1].detail).to.be.equal('Key (empid)=(1111) already exists.');
   });
 
-  it('Should successfully update on the inserted field', () => {
-
+  it('Should successfully update on the inserted field', async () => {
+    cfg.query = 'UPDATE employee SET department= \'invalid input\' WHERE empid=1111';
+    await query.process.call(emitter, msg, cfg);
+    expect(emitter.emit.calledOnce).to.be.equal(true);
+    expect(emitter.emit.args[0][0]).to.be.equal('data');
   });
 
-  it('Should fail to update on something that does not exist', () => {
-
+  it('Should fail to update on something that does not exist', async () => {
+    cfg.query = 'UPDATE employee SET department= \'invalid input\' WHERE empid=1234567';
+    const err = `Result from executing the query q=${cfg.query} values= resulted in 0 rows changed.`;
+    await query.process.call(emitter, msg, cfg);
+    expect(emitter.emit.calledOnce).to.be.equal(true);
+    expect(emitter.emit.args[0][1]).to.include(new Error(err));
   });
 
-  it('Should delete the item that exists', () => {
-
+  it('Should delete the item that exists', async () => {
+    cfg.query = 'DELETE FROM employee WHERE empid=1111';
+    await query.process.call(emitter, msg, cfg);
+    expect(emitter.emit.calledOnce).to.be.equal(true);
+    expect(emitter.emit.args[0][0]).to.be.equal('data');
   });
 
-  it('Should fail to delete on something that does not exist', () => {
-
+  it('Should fail to delete on something that does not exist', async () => {
+    await query.process.call(emitter, msg, cfg);
+    expect(emitter.emit.calledOnce).to.be.equal(true);
+    expect(emitter.emit.args[0][0]).to.be.equal('error');
+    expect(emitter.emit.args[0][1]).to.include(new Error('no rows changed'));
   });
 });
