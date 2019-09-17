@@ -15,7 +15,7 @@ const cfg = {
 };
 
 const msg = {
-  body: '',
+  body: 'Success',
 };
 
 describe('Tests INSERT, UPDATE, DELETE FROM actions', () => {
@@ -31,9 +31,8 @@ describe('Tests INSERT, UPDATE, DELETE FROM actions', () => {
 
   it('Should successfully insert', async () => {
     cfg.query = 'INSERT INTO employee VALUES (1111, \'hello\', \'world\', \'IT\')';
-    await query.process.call(emitter, msg, cfg);
-    expect(emitter.emit.calledOnce).to.be.equal(true);
-    expect(emitter.emit.args[0][0]).to.be.equal('data');
+    const result = await query.process.call(emitter, msg, cfg);
+    expect(result.body).to.be.equal('Success');
   });
 
   it('Should fail to insert if the item already exists', async () => {
@@ -45,9 +44,8 @@ describe('Tests INSERT, UPDATE, DELETE FROM actions', () => {
 
   it('Should successfully update on the inserted field', async () => {
     cfg.query = 'UPDATE employee SET department= \'invalid input\' WHERE empid=1111';
-    await query.process.call(emitter, msg, cfg);
-    expect(emitter.emit.calledOnce).to.be.equal(true);
-    expect(emitter.emit.args[0][0]).to.be.equal('data');
+    const result = await query.process.call(emitter, msg, cfg);
+    expect(result.body).to.be.equal('Success');
   });
 
   it('Should fail to update on something that does not exist', async () => {
@@ -60,9 +58,8 @@ describe('Tests INSERT, UPDATE, DELETE FROM actions', () => {
 
   it('Should delete the item that exists', async () => {
     cfg.query = 'DELETE FROM employee WHERE empid=1111';
-    await query.process.call(emitter, msg, cfg);
-    expect(emitter.emit.calledOnce).to.be.equal(true);
-    expect(emitter.emit.args[0][0]).to.be.equal('data');
+    const result = await query.process.call(emitter, msg, cfg);
+    expect(result.body).to.be.equal('Success');
   });
 
   it('Should fail to delete on something that does not exist', async () => {
