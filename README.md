@@ -1,6 +1,6 @@
 # postgresql-component [![Build Status](https://travis-ci.org/elasticio/postgresql-component.svg?branch=master)](https://travis-ci.org/elasticio/postgresql-component) [![Dependency Status][daviddm-image]][daviddm-url]
 
-> PostgreSQL component for the [elastic.io platform](http://www.elastic.io) that also works well with AWS Redshift
+> PostgreSQL component for the [elastic.io platform](http://www.elastic.io), supports AWS Redshift
 
 This is an open source component for working with [PostgreSQL](https://en.wikipedia.org/wiki/PostgreSQL) object-relational database management system on [elastic.io platform](http://www.elastic.io "elastic.io platform") it also works well with [AWS Redshift](https://aws.amazon.com/redshift/).
 
