@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { expect } = require('chai');
+const logger = require('@elastic.io/component-logger')();
 
 const verifyCredentials = require('../../../verifyCredentials');
 
@@ -16,13 +17,13 @@ describe('verifyCredentials', () => {
   };
 
   it('verify credentials true', async () => {
-    await verifyCredentials(configuration, (o, emittedData) => {
+    await verifyCredentials.call({ logger }, configuration, (o, emittedData) => {
       expect(emittedData).to.deep.eql({ verified: true });
     });
   });
 
   it('verify credentials false', async () => {
-    await verifyCredentials(wrongConfiguration, (o, emittedData) => {
+    await verifyCredentials.call({ logger }, wrongConfiguration, (o, emittedData) => {
       expect(emittedData).to.deep.eql({ verified: false });
     });
   });

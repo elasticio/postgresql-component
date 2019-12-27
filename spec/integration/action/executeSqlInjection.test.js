@@ -2,17 +2,24 @@
 const fs = require('fs');
 const { expect } = require('chai');
 const sinon = require('sinon');
-const pgp = require('pg-promise');
+const logger = require('@elastic.io/component-logger')();
 const generalSqlQuery = require('../../../lib/actions/executeSqlInjection');
 const clientPgPromise = require('../../../lib/clientPgPromise');
-
-let emitter;
 
 describe('GeneralSqlQuery Action test', function () {
   this.timeout(5000);
   if (fs.existsSync('.env')) {
     require('dotenv').config();
   }
+
+  const emitter = {
+    emit: sinon.spy(),
+    logger,
+  };
+
+  afterEach(() => {
+    emitter.emit.resetHistory();
+  });
 
   before(async () => {
     const cfg = {
@@ -40,29 +47,19 @@ describe('GeneralSqlQuery Action test', function () {
 
     const db = clientPgPromise.getDb(cfg);
 
-    db.tx((t) => {
-      return t.batch([msgCreateTable.sql]);
-    }).then((data) => {
-      console.log('Table was created successfully');
+    db.tx(t => t.batch([msgCreateTable.sql])).then((data) => {
+      emitter.logger.info('Table was created successfully');
       return data;
     }).catch((error) => {
-      console.log('Error:', error.message || error);
+      emitter.logger.info('Error:', error.message || error);
     });
 
-    db.tx((t) => {
-      return t.batch([msgCreateFunction.sql]);
-    }).then((data) => {
-      console.log('Table was created successfully');
+    db.tx(t => t.batch([msgCreateFunction.sql])).then((data) => {
+      emitter.logger.info('Table was created successfully');
       return data;
     }).catch((error) => {
-      console.log('Error:', error.message || error);
+      emitter.logger.info('Error:', error.message || error);
     });
-  });
-
-  beforeEach(() => {
-    emitter = {
-      emit: sinon.spy(),
-    };
   });
 
   after(() => {
@@ -84,22 +81,18 @@ describe('GeneralSqlQuery Action test', function () {
 
     const db = clientPgPromise.getDb(cfg);
 
-    db.tx((t) => {
-      return t.batch([msgDeleteTable.sql]);
-    }).then((data) => {
-      console.log('Table was deleted successfully');
+    db.tx(t => t.batch([msgDeleteTable.sql])).then((data) => {
+      emitter.logger.info('Table was deleted successfully');
       return data;
     }).catch((error) => {
-      console.log('Error:', error.message || error);
+      emitter.logger.info('Error:', error.message || error);
     });
 
-    db.tx((t) => {
-      return t.batch([msgDeleteFunction.sql]);
-    }).then((data) => {
-      console.log('Table was deleted successfully');
+    db.tx(t => t.batch([msgDeleteFunction.sql])).then((data) => {
+      emitter.logger.info('Table was deleted successfully');
       return data;
     }).catch((error) => {
-      console.log('Error:', error.message || error);
+      emitter.logger.info('Error:', error.message || error);
     });
   });
 
@@ -149,7 +142,9 @@ describe('GeneralSqlQuery Action test', function () {
   it('should be deadlock', async () => {
     // for i in {1..3}; do psql elasticio_testdb postgres -c "select f_test('blah')"; done
     for (let i = 0; i < 3; i++) {
-      promiseArray.push(generalSqlQuery.process.call(emitter, msgWithDeadlock, cfgWithDeadlock));
+      promiseArray.push(
+        generalSqlQuery.process.call(emitter, msgWithDeadlock, cfgWithDeadlock)
+      );
     }
     await Promise.all(promiseArray);
 

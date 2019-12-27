@@ -1,5 +1,6 @@
 const assert = require('assert');
 const { expect } = require('chai');
+const logger = require('@elastic.io/component-logger')();
 const utils = require('../../lib/utils.js');
 
 describe('SQL Parser', () => {
@@ -88,7 +89,7 @@ describe('Prepare query string', () => {
       column1,
       column2,
     };
-    const result = utils.prepareQuery(sql, body);
+    const result = utils.prepareQuery(logger, sql, body);
     expect(result).to.deep.equal(preparedSql);
   });
 
@@ -98,7 +99,7 @@ describe('Prepare query string', () => {
       column1: 5,
       column2: 7,
     };
-    const result = utils.prepareQuery(sql, body);
+    const result = utils.prepareQuery(logger, sql, body);
     expect(result).to.deep.equal(sql);
   });
 
@@ -109,7 +110,7 @@ describe('Prepare query string', () => {
       column2: 7,
     };
     try {
-      utils.prepareQuery(sql, body);
+      utils.prepareQuery(logger, sql, body);
     } catch (error) {
       expect(error.toString()).to.equal('Error: DROP and ALTER commands are not allowed to execute');
     }
@@ -129,11 +130,11 @@ describe('Prepare array of query string', () => {
       column1,
       column2,
     };
-    const result = utils.prepareQueries(sql, body);
+    const result = utils.prepareQueries(logger, sql, body);
     expect(result).to.deep.equal(preparedSql);
   });
 
-  it('Should prepare array of two  Parameterized Queries', () => {
+  it('Should prepare array of two Parameterized Queries', () => {
     const column1 = 525;
     const column2 = 'Hello525';
     const column3 = 'Test';
@@ -150,7 +151,7 @@ describe('Prepare array of query string', () => {
       column2,
       column3,
     };
-    const result = utils.prepareQueries(sql, body);
+    const result = utils.prepareQueries(logger, sql, body);
     expect(result).to.deep.equal(preparedSql);
   });
 
@@ -160,7 +161,7 @@ describe('Prepare array of query string', () => {
       column1: 5,
       column2: 7,
     };
-    const result = utils.prepareQueries(sql, body);
+    const result = utils.prepareQueries(logger, sql, body);
     expect(result).to.deep.equal([sql]);
   });
 
@@ -168,7 +169,7 @@ describe('Prepare array of query string', () => {
   it('Should remove comments', () => {
     const sql = 'select * from  /*Hello*/ stg.testTable1 --comments';
     const preparedSql = ['select * from stg.testTable1'];
-    const result = utils.prepareQueries(sql, {});
+    const result = utils.prepareQueries(logger, sql, {});
     expect(result).to.deep.equal(preparedSql);
   });
 });
