@@ -21,9 +21,12 @@ Following acitons are inside:
 ![image](https://user-images.githubusercontent.com/40201204/61518227-bb985780-aa11-11e9-9d18-d2a9c3cc3e65.png)
 [PostgreSQL Component Completeness Matrix](https://drive.google.com/open?id=1XQGqPAGUmT31EN1XRrk2iqRlPoqj5pi6E4KvsA7bayU)
 
+### Environment Variables
+`LOG_LEVEL` - `trace` | `debug` | `info` | `warning` | `error` controls logger level
+
 ## Authentication
 
-You would need a full PosgreSQL connection URL to connect to your database, it should looks like this:
+You would need a full PostgreSQL connection URL to connect to your database, it should looks like this:
 
 ```
 postgress://username:pa$$word@your.postgresql.host:5432/dbname

@@ -1,6 +1,7 @@
 /* eslint-disable no-template-curly-in-string */
 const assert = require('assert');
 const eioUtils = require('elasticio-node').messages;
+const logger = require('@elastic.io/component-logger')();
 const utils = require('../../lib/utils.js');
 
 describe('Query builder', () => {
@@ -19,7 +20,7 @@ describe('Query builder', () => {
       price: 22.45,
       category: 42,
     });
-    const result = utils.prepareStatement(sql, msg);
+    const result = utils.prepareStatement.call({ logger }, sql, msg);
     assert(result);
     assert.equal(result.values.length, 7);
     assert.equal(result.values[1], 'Charles Robert Darwin');

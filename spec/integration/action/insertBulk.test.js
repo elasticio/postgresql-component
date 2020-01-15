@@ -2,6 +2,7 @@
 const fs = require('fs');
 const { expect } = require('chai');
 const sinon = require('sinon');
+const logger = require('@elastic.io/component-logger')();
 
 const insertBulk = require('../../../lib/actions/insertBulk');
 
@@ -14,6 +15,7 @@ describe('insertBulk Action test', () => {
   beforeEach(() => {
     emitter = {
       emit: sinon.spy(),
+      logger,
     };
   });
   const msg = {

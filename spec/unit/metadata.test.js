@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-expressions */
 const { expect } = require('chai');
+const logger = require('@elastic.io/component-logger')();
 const action = require('../../lib/actions/generalSqlQuery');
 
 describe('Metadata test', () => {
@@ -10,7 +11,7 @@ describe('Metadata test', () => {
   };
 
   it('should generate metadata', (done) => {
-    action.getMetaModel(cfg, (err, result) => {
+    action.getMetaModel.call({ logger }, cfg, (err, result) => {
       expect(err).to.be.null;
       expect(result).to.deep.equal({
         in: {
@@ -51,7 +52,7 @@ describe('Metadata test', () => {
   });
 
   it('should not fail on empty query', (done) => {
-    action.getMetaModel({}, (err, result) => {
+    action.getMetaModel.call({ logger }, {}, (err, result) => {
       expect(err).to.be.null;
       expect(result).to.deep.equal({
         in: {
@@ -64,7 +65,7 @@ describe('Metadata test', () => {
   });
 
   it('should not handle duplicate fields', (done) => {
-    action.getMetaModel({
+    action.getMetaModel.call({ logger }, {
       sql: '@foo:string @foo:string @bar:date',
     }, (err, result) => {
       expect(err).to.be.null;
@@ -86,7 +87,7 @@ describe('Metadata test', () => {
   });
 
   it('should assume default metadata as stirng', (done) => {
-    action.getMetaModel({
+    action.getMetaModel.call({ logger }, {
       sql: 'INSERT INTO Test2.dbo.Tweets '
         + '(Lang, Retweeted, Favorited, "Text", id, CreatedAt, Username, ScreenName) '
         + 'VALUES (@lang, @retweeted:float, @money:money, @favorited:boolean, '

@@ -2,6 +2,7 @@
 const fs = require('fs');
 const { expect } = require('chai');
 const sinon = require('sinon');
+const logger = require('@elastic.io/component-logger')();
 
 const generalSqlQuery = require('../../../lib/actions/generalSqlQuery');
 
@@ -14,6 +15,7 @@ describe('GeneralSqlQuery Action test', () => {
   beforeEach(() => {
     emitter = {
       emit: sinon.spy(),
+      logger,
     };
   });
   const msg = {

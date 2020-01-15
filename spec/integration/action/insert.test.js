@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { expect } = require('chai');
 const sinon = require('sinon');
+const logger = require('@elastic.io/component-logger')();
 
 const query = require('../../../lib/actions/insert');
 
@@ -19,7 +20,10 @@ const msg = {
 };
 
 describe('Tests INSERT, UPDATE, DELETE FROM actions', () => {
-  const emitter = { emit: sinon.spy() };
+  const emitter = {
+    emit: sinon.spy(),
+    logger,
+  };
 
   beforeEach(() => {
     emitter.emit.resetHistory();
