@@ -23,7 +23,12 @@ describe('GeneralSqlQuery Action test', function () {
 
   before(async () => {
     const cfg = {
-      conString: process.env.conString,
+      host: process.env.host,
+      port: process.env.port,
+      databaseName: process.env.databaseName,
+      user: process.env.user,
+      password: process.env.password,
+      configurationProperties: process.env.configurationProperties,
     };
 
     const msgCreateTable = {
@@ -64,7 +69,12 @@ describe('GeneralSqlQuery Action test', function () {
 
   after(() => {
     const cfg = {
-      conString: process.env.conString,
+      host: process.env.host,
+      port: process.env.port,
+      databaseName: process.env.databaseName,
+      user: process.env.user,
+      password: process.env.password,
+      configurationProperties: process.env.configurationProperties,
     };
 
     const msgDeleteTable = {
@@ -117,11 +127,21 @@ describe('GeneralSqlQuery Action test', function () {
   };
 
   const cfg = {
-    conString: process.env.conString,
+    host: process.env.host,
+    port: process.env.port,
+    databaseName: process.env.databaseName,
+    user: process.env.user,
+    password: process.env.password,
+    configurationProperties: process.env.configurationProperties,
   };
 
   const cfgWithDeadlock = {
-    conString: process.env.conString,
+    host: process.env.host,
+    port: process.env.port,
+    databaseName: process.env.databaseName,
+    user: process.env.user,
+    password: process.env.password,
+    configurationProperties: process.env.configurationProperties,
     sql: 'select f_test(\'blah\');',
     retriesLeft: 3,
   };

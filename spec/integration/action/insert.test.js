@@ -11,7 +11,12 @@ if (fs.existsSync('.env')) {
 }
 
 const cfg = {
-  conString: process.env.conString,
+  host: process.env.host,
+  port: process.env.port,
+  databaseName: process.env.databaseName,
+  user: process.env.user,
+  password: process.env.password,
+  configurationProperties: process.env.configurationProperties,
   query: 'DELETE FROM employee WHERE empid=1111',
 };
 

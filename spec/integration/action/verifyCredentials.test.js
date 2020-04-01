@@ -10,10 +10,20 @@ describe('verifyCredentials', () => {
   }
 
   const configuration = {
-    conString: process.env.conString,
+    host: process.env.host,
+    port: process.env.port,
+    databaseName: process.env.databaseName,
+    user: process.env.user,
+    password: process.env.password,
+    configurationProperties: process.env.configurationProperties,
   };
   const wrongConfiguration = {
-    conString: 'test',
+    host: 'test',
+    port: 'test',
+    databaseName: 'test',
+    user: 'test',
+    password: 'test',
+    configurationProperties: 'test',
   };
 
   it('verify credentials true', async () => {

@@ -25,12 +25,22 @@ describe('GeneralSqlQuery Action test', () => {
     },
   };
   const cfg = {
-    conString: process.env.conString,
+    host: process.env.host,
+    port: process.env.port,
+    databaseName: process.env.databaseName,
+    user: process.env.user,
+    password: process.env.password,
+    configurationProperties: process.env.configurationProperties,
     sql: 'SELECT \'abc\' AS col1, 123 AS col2; SELECT \'def\' AS col3, 456 AS col4',
   };
 
   const cfgWithError = {
-    conString: process.env.conString,
+    host: process.env.host,
+    port: process.env.port,
+    databaseName: process.env.databaseName,
+    user: process.env.user,
+    password: process.env.password,
+    configurationProperties: process.env.configurationProperties,
     sql: 'select * froum stg.testolha1 where column1 = @column1:number and column2 = @column2:string; select * from stg.testo',
   };
 

@@ -9,19 +9,19 @@
         "viewClass": "TextFieldView",
         "label": "Connection URI (host)",
         "required": true,
-        "placeholder": "Connection URI"
+        "placeholder": "localhost"
       },
       "port": {
         "viewClass": "TextFieldView",
         "label": "Connection port",
         "required": false,
-        "placeholder": "Connection port"
+        "placeholder": "1234"
       },
       "databaseName": {
         "viewClass": "TextFieldView",
         "label": "Database Name",
         "required": true,
-        "placeholder": "Database Name"
+        "placeholder": "mydb"
       },
       "user": {
         "viewClass": "TextFieldView",
@@ -39,7 +39,7 @@
         "viewClass": "TextFieldView",
         "label": "Configuration properties",
         "required": false,
-        "placeholder": "useUnicode=true&serverTimezone=UTC"
+        "placeholder": "param1=value1&param2&value2"
       }
     }
   },
