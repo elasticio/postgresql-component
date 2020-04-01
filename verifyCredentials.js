@@ -3,7 +3,7 @@ const pg = require('pg');
 // This function will be called by the platform to verify credentials
 module.exports = function verifyCredentials(credentials, cb) {
   const {
-    protocol = 'postgresql',
+    protocol,
     host,
     port,
     databaseName,
