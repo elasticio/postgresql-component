@@ -23,6 +23,7 @@ describe('GeneralSqlQuery Action test', function () {
 
   before(async () => {
     const cfg = {
+      protocol: process.env.protocol,
       host: process.env.host,
       port: process.env.port,
       databaseName: process.env.databaseName,
@@ -69,6 +70,7 @@ describe('GeneralSqlQuery Action test', function () {
 
   after(() => {
     const cfg = {
+      protocol: process.env.protocol,
       host: process.env.host,
       port: process.env.port,
       databaseName: process.env.databaseName,
@@ -127,6 +129,7 @@ describe('GeneralSqlQuery Action test', function () {
   };
 
   const cfg = {
+    protocol: process.env.protocol,
     host: process.env.host,
     port: process.env.port,
     databaseName: process.env.databaseName,
@@ -136,6 +139,7 @@ describe('GeneralSqlQuery Action test', function () {
   };
 
   const cfgWithDeadlock = {
+    protocol: process.env.protocol,
     host: process.env.host,
     port: process.env.port,
     databaseName: process.env.databaseName,

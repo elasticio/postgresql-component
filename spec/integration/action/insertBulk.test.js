@@ -30,6 +30,7 @@ describe('insertBulk Action test', () => {
     },
   };
   const cfg = {
+    protocol: process.env.protocol,
     host: process.env.host,
     port: process.env.port,
     databaseName: process.env.databaseName,

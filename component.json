@@ -5,6 +5,12 @@
   "docsUrl":"https://github.com/elasticio/postgresql-component",
   "credentials": {
     "fields": {
+      "protocol": {
+        "viewClass": "TextFieldView",
+        "label": "Protocol",
+        "required": true,
+        "placeholder": "postgresql"
+      }
       "host": {
         "viewClass": "TextFieldView",
         "label": "Connection URI (host)",

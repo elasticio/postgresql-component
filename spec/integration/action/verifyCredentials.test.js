@@ -10,6 +10,7 @@ describe('verifyCredentials', () => {
   }
 
   const configuration = {
+    protocol: process.env.protocol,
     host: process.env.host,
     port: process.env.port,
     databaseName: process.env.databaseName,
@@ -18,6 +19,7 @@ describe('verifyCredentials', () => {
     configurationProperties: process.env.configurationProperties,
   };
   const wrongConfiguration = {
+    protocol: 'test',
     host: 'test',
     port: 'test',
     databaseName: 'test',
