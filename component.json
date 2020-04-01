@@ -5,11 +5,41 @@
   "docsUrl":"https://github.com/elasticio/postgresql-component",
   "credentials": {
     "fields": {
-      "conString": {
-        "label": "Connection String",
-        "required": true,
+      "host": {
         "viewClass": "TextFieldView",
-        "placeholder": "postgres://username:password@localhost/database"
+        "label": "Connection URI (host)",
+        "required": true,
+        "placeholder": "Connection URI"
+      },
+      "port": {
+        "viewClass": "TextFieldView",
+        "label": "Connection port",
+        "required": false,
+        "placeholder": "Connection port"
+      },
+      "databaseName": {
+        "viewClass": "TextFieldView",
+        "label": "Database Name",
+        "required": true,
+        "placeholder": "Database Name"
+      },
+      "user": {
+        "viewClass": "TextFieldView",
+        "label": "User",
+        "required": true,
+        "placeholder": "User"
+      },
+      "password": {
+        "viewClass": "PasswordFieldView",
+        "label": "Password",
+        "required": true,
+        "placeholder": "Password"
+      },
+      "configurationProperties": {
+        "viewClass": "TextFieldView",
+        "label": "Configuration properties",
+        "required": false,
+        "placeholder": "useUnicode=true&serverTimezone=UTC"
       }
     }
   },
