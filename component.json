@@ -8,7 +8,7 @@
       "protocol": {
         "viewClass": "TextFieldView",
         "label": "Protocol",
-        "required": true,
+        "required": false,
         "placeholder": "postgresql"
       },
       "host": {
