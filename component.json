@@ -6,7 +6,7 @@
   "credentials": {
     "fields": {
       "conString": {
-        "viewClass": "TestFieldView",
+        "viewClass": "TextFieldView",
         "label": "Connection String (do not fill out other fields if using this)",
         "required": false,
         "placeholder": "postgresql://user:password@localhost:1234/mydb"
