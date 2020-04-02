@@ -124,6 +124,8 @@ describe('GeneralSqlQuery Action test', function () {
     },
   };
 
+  const { conString } = process.env;
+
   const cfg = {
     host: process.env.host,
     port: process.env.port,
@@ -146,6 +148,12 @@ describe('GeneralSqlQuery Action test', function () {
 
   it('should selected', async () => {
     await generalSqlQuery.process.call(emitter, msg, cfg);
+    expect(emitter.emit.calledWith('data')).to.be.equal(true);
+    expect(emitter.emit.args[0][1].body).to.deep.equal({ result });
+  });
+
+  it('should selected with configuration string', async () => {
+    await generalSqlQuery.process.call(emitter, msg, { conString });
     expect(emitter.emit.calledWith('data')).to.be.equal(true);
     expect(emitter.emit.args[0][1].body).to.deep.equal({ result });
   });
