@@ -7,27 +7,27 @@
     "fields": {
       "conString": {
         "viewClass": "TextFieldView",
-        "label": "Connection String (do not fill out other fields if using this)",
+        "label": "Connection String (don't need fill out other fields if using this)",
         "required": false,
-        "placeholder": "postgresql://user:password@localhost:1234/mydb"
+        "placeholder": "postgresql://user:password@your.postgresql.host:5432/dbname"
       },
       "host": {
         "viewClass": "TextFieldView",
         "label": "Connection URI (host)",
         "required": false,
-        "placeholder": "localhost"
+        "placeholder": "your.postgresql.host"
       },
       "port": {
         "viewClass": "TextFieldView",
         "label": "Connection port",
         "required": false,
-        "placeholder": "1234"
+        "placeholder": "5432"
       },
       "database": {
         "viewClass": "TextFieldView",
         "label": "Database Name",
         "required": false,
-        "placeholder": "mydb"
+        "placeholder": "dbname"
       },
       "user": {
         "viewClass": "TextFieldView",
