@@ -3,17 +3,25 @@ const pg = require('pg');
 // This function will be called by the platform to verify credentials
 module.exports = function verifyCredentials(credentials, cb) {
   const {
-    protocol,
     host,
     port,
-    databaseName,
+    database,
     user,
     password,
-    configurationProperties,
+    conString,
   } = credentials;
-  const connectionString = `${protocol}://${user}:${password}@${host}${port ? `:${port}` : ''}/${databaseName}${configurationProperties ? `?${configurationProperties}` : ''}`;
 
-  const pool = new pg.Pool({ connectionString });
+  const configuration = conString ? {
+    connectionString: conString,
+  } : {
+    user,
+    host,
+    database,
+    password,
+    port,
+  };
+
+  const pool = new pg.Pool(configuration);
 
   pool.connect((err, client, done) => {
     if (err) {

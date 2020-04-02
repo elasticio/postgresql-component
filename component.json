@@ -5,16 +5,16 @@
   "docsUrl":"https://github.com/elasticio/postgresql-component",
   "credentials": {
     "fields": {
-      "protocol": {
-        "viewClass": "TextFieldView",
-        "label": "Protocol",
-        "required": true,
-        "placeholder": "postgresql"
+      "conString": {
+        "viewClass": "TestFieldView",
+        "label": "Connection String (do not fill out other fields if using this)",
+        "required": false,
+        "placeholder": "postgresql://user:password@localhost:1234/mydb"
       },
       "host": {
         "viewClass": "TextFieldView",
         "label": "Connection URI (host)",
-        "required": true,
+        "required": false,
         "placeholder": "localhost"
       },
       "port": {
@@ -23,29 +23,23 @@
         "required": false,
         "placeholder": "1234"
       },
-      "databaseName": {
+      "database": {
         "viewClass": "TextFieldView",
         "label": "Database Name",
-        "required": true,
+        "required": false,
         "placeholder": "mydb"
       },
       "user": {
         "viewClass": "TextFieldView",
         "label": "User",
-        "required": true,
+        "required": false,
         "placeholder": "User"
       },
       "password": {
         "viewClass": "PasswordFieldView",
         "label": "Password",
-        "required": true,
-        "placeholder": "Password"
-      },
-      "configurationProperties": {
-        "viewClass": "TextFieldView",
-        "label": "Configuration properties",
         "required": false,
-        "placeholder": "param1=value1&param2&value2"
+        "placeholder": "Password"
       }
     }
   },

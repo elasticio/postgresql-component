@@ -23,13 +23,11 @@ describe('GeneralSqlQuery Action test', function () {
 
   before(async () => {
     const cfg = {
-      protocol: process.env.protocol,
       host: process.env.host,
       port: process.env.port,
-      databaseName: process.env.databaseName,
+      database: process.env.database,
       user: process.env.user,
       password: process.env.password,
-      configurationProperties: process.env.configurationProperties,
     };
 
     const msgCreateTable = {
@@ -70,13 +68,11 @@ describe('GeneralSqlQuery Action test', function () {
 
   after(() => {
     const cfg = {
-      protocol: process.env.protocol,
       host: process.env.host,
       port: process.env.port,
-      databaseName: process.env.databaseName,
+      database: process.env.database,
       user: process.env.user,
       password: process.env.password,
-      configurationProperties: process.env.configurationProperties,
     };
 
     const msgDeleteTable = {
@@ -129,23 +125,19 @@ describe('GeneralSqlQuery Action test', function () {
   };
 
   const cfg = {
-    protocol: process.env.protocol,
     host: process.env.host,
     port: process.env.port,
-    databaseName: process.env.databaseName,
+    database: process.env.database,
     user: process.env.user,
     password: process.env.password,
-    configurationProperties: process.env.configurationProperties,
   };
 
   const cfgWithDeadlock = {
-    protocol: process.env.protocol,
     host: process.env.host,
     port: process.env.port,
-    databaseName: process.env.databaseName,
+    database: process.env.database,
     user: process.env.user,
     password: process.env.password,
-    configurationProperties: process.env.configurationProperties,
     sql: 'select f_test(\'blah\');',
     retriesLeft: 3,
   };

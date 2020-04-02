@@ -22,13 +22,11 @@ describe('Select Action test', () => {
     body: {},
   };
   const cfg = {
-    protocol: process.env.protocol,
     host: process.env.host,
     port: process.env.port,
-    databaseName: process.env.databaseName,
+    database: process.env.database,
     user: process.env.user,
     password: process.env.password,
-    configurationProperties: process.env.configurationProperties,
     query: 'SELECT * FROM pg_catalog.pg_tables',
   };
 
