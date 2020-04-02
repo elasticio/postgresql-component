@@ -31,12 +31,6 @@ describe('verifyCredentials', () => {
     });
   });
 
-  it('successfully verifies credentials with the connection string', async () => {
-    await verifyCredentials.call({ logger }, { connectionString }, (o, emittedData) => {
-      expect(emittedData).to.deep.eql({ verified: true });
-    });
-  });
-
   it('verify credentials false', async () => {
     await verifyCredentials.call({ logger }, wrongConfiguration, (o, emittedData) => {
       expect(emittedData).to.deep.eql({ verified: false });
