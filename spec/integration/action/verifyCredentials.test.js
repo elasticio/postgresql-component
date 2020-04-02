@@ -9,6 +9,8 @@ describe('verifyCredentials', () => {
     require('dotenv').config();
   }
 
+  const connectionString = process.env.conString;
+
   const configuration = {
     host: process.env.host,
     port: process.env.port,
@@ -25,6 +27,12 @@ describe('verifyCredentials', () => {
 
   it('verify credentials true', async () => {
     await verifyCredentials.call({ logger }, configuration, (o, emittedData) => {
+      expect(emittedData).to.deep.eql({ verified: true });
+    });
+  });
+
+  it('successfully verifies credentials with the connection string', async () => {
+    await verifyCredentials.call({ logger }, { connectionString }, (o, emittedData) => {
       expect(emittedData).to.deep.eql({ verified: true });
     });
   });
