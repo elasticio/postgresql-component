@@ -24,13 +24,22 @@ describe('GeneralSqlQuery Action test', () => {
       column2: 'Hello525',
     },
   };
+  const { conString } = process.env;
   const cfg = {
-    conString: process.env.conString,
+    host: process.env.host,
+    port: process.env.port,
+    database: process.env.database,
+    user: process.env.user,
+    password: process.env.password,
     sql: 'SELECT \'abc\' AS col1, 123 AS col2; SELECT \'def\' AS col3, 456 AS col4',
   };
 
   const cfgWithError = {
-    conString: process.env.conString,
+    host: process.env.host,
+    port: process.env.port,
+    database: process.env.database,
+    user: process.env.user,
+    password: process.env.password,
     sql: 'select * froum stg.testolha1 where column1 = @column1:number and column2 = @column2:string; select * from stg.testo',
   };
 
@@ -51,6 +60,12 @@ describe('GeneralSqlQuery Action test', () => {
 
   it('should selected', async () => {
     await generalSqlQuery.process.call(emitter, msg, cfg);
+    expect(emitter.emit.calledWith('data')).to.be.equal(true);
+    expect(emitter.emit.args[0][1].body).to.deep.equal({ result });
+  });
+
+  it('should selected with configuration string', async () => {
+    await generalSqlQuery.process.call(emitter, msg, { conString, ...cfg });
     expect(emitter.emit.calledWith('data')).to.be.equal(true);
     expect(emitter.emit.args[0][1].body).to.deep.equal({ result });
   });

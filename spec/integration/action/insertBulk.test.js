@@ -30,7 +30,11 @@ describe('insertBulk Action test', () => {
     },
   };
   const cfg = {
-    conString: process.env.conString,
+    host: process.env.host,
+    port: process.env.port,
+    database: process.env.database,
+    user: process.env.user,
+    password: process.env.password,
     columns: 'col0, col1',
     tableName: 'bulk_insert_test',
   };

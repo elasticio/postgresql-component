@@ -9,12 +9,27 @@ describe('verifyCredentials', () => {
     require('dotenv').config();
   }
 
+  const { conString } = process.env;
+
   const configuration = {
-    conString: process.env.conString,
+    host: process.env.host,
+    port: process.env.port,
+    database: process.env.database,
+    user: process.env.user,
+    password: process.env.password,
   };
   const wrongConfiguration = {
-    conString: 'test',
+    host: 'test',
+    database: 'test',
+    user: 'test',
+    password: 'test',
   };
+
+  it('successfully verifies credentials with the connection string', async () => {
+    await verifyCredentials.call({ logger }, { conString }, (o, emittedData) => {
+      expect(emittedData).to.deep.eql({ verified: true });
+    });
+  });
 
   it('verify credentials true', async () => {
     await verifyCredentials.call({ logger }, configuration, (o, emittedData) => {

@@ -23,7 +23,11 @@ describe('GeneralSqlQuery Action test', function () {
 
   before(async () => {
     const cfg = {
-      conString: process.env.conString,
+      host: process.env.host,
+      port: process.env.port,
+      database: process.env.database,
+      user: process.env.user,
+      password: process.env.password,
     };
 
     const msgCreateTable = {
@@ -64,7 +68,11 @@ describe('GeneralSqlQuery Action test', function () {
 
   after(() => {
     const cfg = {
-      conString: process.env.conString,
+      host: process.env.host,
+      port: process.env.port,
+      database: process.env.database,
+      user: process.env.user,
+      password: process.env.password,
     };
 
     const msgDeleteTable = {
@@ -116,12 +124,22 @@ describe('GeneralSqlQuery Action test', function () {
     },
   };
 
+  const { conString } = process.env;
+
   const cfg = {
-    conString: process.env.conString,
+    host: process.env.host,
+    port: process.env.port,
+    database: process.env.database,
+    user: process.env.user,
+    password: process.env.password,
   };
 
   const cfgWithDeadlock = {
-    conString: process.env.conString,
+    host: process.env.host,
+    port: process.env.port,
+    database: process.env.database,
+    user: process.env.user,
+    password: process.env.password,
     sql: 'select f_test(\'blah\');',
     retriesLeft: 3,
   };
@@ -130,6 +148,12 @@ describe('GeneralSqlQuery Action test', function () {
 
   it('should selected', async () => {
     await generalSqlQuery.process.call(emitter, msg, cfg);
+    expect(emitter.emit.calledWith('data')).to.be.equal(true);
+    expect(emitter.emit.args[0][1].body).to.deep.equal({ result });
+  });
+
+  it('should selected with configuration string', async () => {
+    await generalSqlQuery.process.call(emitter, msg, { conString });
     expect(emitter.emit.calledWith('data')).to.be.equal(true);
     expect(emitter.emit.args[0][1].body).to.deep.equal({ result });
   });

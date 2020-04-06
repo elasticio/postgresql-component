@@ -6,10 +6,40 @@
   "credentials": {
     "fields": {
       "conString": {
-        "label": "Connection String",
-        "required": true,
         "viewClass": "TextFieldView",
-        "placeholder": "postgres://username:password@localhost/database"
+        "label": "Connection String (don't need fill out other fields if using this)",
+        "required": false,
+        "placeholder": "postgresql://user:password@your.postgresql.host:5432/dbname"
+      },
+      "host": {
+        "viewClass": "TextFieldView",
+        "label": "Connection URI (host)",
+        "required": false,
+        "placeholder": "your.postgresql.host"
+      },
+      "port": {
+        "viewClass": "TextFieldView",
+        "label": "Connection port",
+        "required": false,
+        "placeholder": "5432"
+      },
+      "database": {
+        "viewClass": "TextFieldView",
+        "label": "Database Name",
+        "required": false,
+        "placeholder": "dbname"
+      },
+      "user": {
+        "viewClass": "TextFieldView",
+        "label": "User",
+        "required": false,
+        "placeholder": "User"
+      },
+      "password": {
+        "viewClass": "PasswordFieldView",
+        "label": "Password",
+        "required": false,
+        "placeholder": "Password"
       }
     }
   },

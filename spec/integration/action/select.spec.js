@@ -21,8 +21,13 @@ describe('Select Action test', () => {
   const msg = {
     body: {},
   };
+  const { conString } = process.env;
   const cfg = {
-    conString: process.env.conString,
+    host: process.env.host,
+    port: process.env.port,
+    database: process.env.database,
+    user: process.env.user,
+    password: process.env.password,
     query: 'SELECT * FROM pg_catalog.pg_tables',
   };
 
@@ -31,6 +36,16 @@ describe('Select Action test', () => {
     await new Promise((resolve) => {
       emitter.emit = resolve();
       selectAction.process.call(emitter, msg, cfg);
+      done = true;
+    });
+    expect(done).equals(true);
+  });
+
+  it('makes select with configuration string', async () => {
+    let done = false;
+    await new Promise((resolve) => {
+      emitter.emit = resolve();
+      selectAction.process.call(emitter, msg, { conString, ...cfg });
       done = true;
     });
     expect(done).equals(true);

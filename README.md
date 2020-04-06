@@ -26,11 +26,14 @@ Following acitons are inside:
 
 ## Authentication
 
-You would need a full PostgreSQL connection URL to connect to your database, it should looks like this:
+There are two options for authentication:
+1. Filling out the Connection URI (host), Connection port, Database Name, User, and Password fields. This is the recommended method.
+2. Adding a full PostgreSQL connection URL in the Connection String field to connect to your database, as follows:
+```
+postgresql://user:password@your.postgresql.host:5432/dbname
+```
 
-```
-postgress://username:pa$$word@your.postgresql.host:5432/dbname
-```
+Note: if you fill out both the Connection String and all the other connection data fields, the platform will use the connection string to connect to the database.
 
 See more in [documentation](https://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING).
 
