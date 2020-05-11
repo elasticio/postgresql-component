@@ -6,6 +6,7 @@ const logger = require('@elastic.io/component-logger')();
 const generalSqlQuery = require('../../../lib/actions/executeSqlInjection');
 const clientPgPromise = require('../../../lib/clientPgPromise');
 
+// eslint-disable-next-line func-names
 describe('GeneralSqlQuery Action test', function () {
   this.timeout(5000);
   if (fs.existsSync('.env')) {
@@ -51,14 +52,14 @@ describe('GeneralSqlQuery Action test', function () {
 
     const db = clientPgPromise.getDb(cfg);
 
-    db.tx(t => t.batch([msgCreateTable.sql])).then((data) => {
+    db.tx((t) => t.batch([msgCreateTable.sql])).then((data) => {
       emitter.logger.info('Table was created successfully');
       return data;
     }).catch((error) => {
       emitter.logger.info('Error:', error.message || error);
     });
 
-    db.tx(t => t.batch([msgCreateFunction.sql])).then((data) => {
+    db.tx((t) => t.batch([msgCreateFunction.sql])).then((data) => {
       emitter.logger.info('Table was created successfully');
       return data;
     }).catch((error) => {
@@ -89,14 +90,14 @@ describe('GeneralSqlQuery Action test', function () {
 
     const db = clientPgPromise.getDb(cfg);
 
-    db.tx(t => t.batch([msgDeleteTable.sql])).then((data) => {
+    db.tx((t) => t.batch([msgDeleteTable.sql])).then((data) => {
       emitter.logger.info('Table was deleted successfully');
       return data;
     }).catch((error) => {
       emitter.logger.info('Error:', error.message || error);
     });
 
-    db.tx(t => t.batch([msgDeleteFunction.sql])).then((data) => {
+    db.tx((t) => t.batch([msgDeleteFunction.sql])).then((data) => {
       emitter.logger.info('Table was deleted successfully');
       return data;
     }).catch((error) => {
@@ -167,7 +168,7 @@ describe('GeneralSqlQuery Action test', function () {
     // for i in {1..3}; do psql elasticio_testdb postgres -c "select f_test('blah')"; done
     for (let i = 0; i < 3; i++) {
       promiseArray.push(
-        generalSqlQuery.process.call(emitter, msgWithDeadlock, cfgWithDeadlock)
+        generalSqlQuery.process.call(emitter, msgWithDeadlock, cfgWithDeadlock),
       );
     }
     await Promise.all(promiseArray);

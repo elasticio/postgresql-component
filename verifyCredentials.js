@@ -23,6 +23,7 @@ module.exports = function verifyCredentials(credentials, cb) {
 
   const pool = new pg.Pool(configuration);
 
+  // eslint-disable-next-line consistent-return
   pool.connect((err, client, done) => {
     if (err) {
       this.logger.error('error fetching client from pool', err);

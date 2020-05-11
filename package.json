@@ -1,6 +1,6 @@
 {
   "name": "postresql-component",
-  "version": "1.3.2",
+  "version": "1.3.4",
   "description": "PostgreSQL component for elastic.io platform",
   "homepage": "http://www.elastic.io",
   "author": {
@@ -9,7 +9,8 @@
     "url": "http://elastic.io"
   },
   "engines": {
-    "npm": "6.13.4"
+    "npm": "6.13.4",
+    "node": "12"
   },
   "files": [
     "lib"
@@ -21,38 +22,33 @@
     "elasticio-component"
   ],
   "dependencies": {
-    "dotenv": "6.2.0",
+    "dotenv": "8.2.0",
     "elasticio-node": "0.0.9",
-    "elasticio-sailor-nodejs": "2.5.4",
-    "lodash": "4.17.11",
-    "pg": "6.4.2",
-    "pg-cursor": "1.3.0",
-    "pg-promise": "8.6.4",
+    "elasticio-sailor-nodejs": "2.6.7",
+    "lodash": "4.17.15",
+    "pg": "8.1.0",
+    "pg-cursor": "2.1.11",
+    "pg-promise": "10.5.5",
     "q": "1.5.1",
-    "sinon": "7.2.3",
+    "sinon": "9.0.2",
     "sql-parser": "zubairov/sql-parser",
-    "sql-template-strings": "2.2.2"
+    "sql-template-strings": "2.2.2",
+    "@elastic.io/component-logger": "0.0.1"
   },
   "devDependencies": {
-    "@elastic.io/component-logger": "0.0.1",
-    "eslint": "5.16.0",
-    "eslint-config-airbnb": "17.1.0",
-    "eslint-plugin-import": "2.16.0",
-    "eslint-plugin-jsx-a11y": "6.2.1",
-    "eslint-plugin-react": "7.12.4",
+    "eslint": "7.0.0",
+    "eslint-config-airbnb": "18.1.0",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-react": "7.19.0",
     "mocha": "5.2.0",
     "chai": "4.2.0"
   },
   "scripts": {
+    "pretest": "eslint spec lib verifyCredentials.js --fix",
     "test": "npm run unit-test",
     "unit-test": "mocha spec/unit --recursive --timeout 50000",
     "integration-test": "mocha spec/integration --recursive --timeout 50000"
-  },
-  "eslintConfig": {
-    "extends": "xo-space",
-    "env": {
-      "mocha": true
-    }
   },
   "repository": "elasticio/postgresql-component",
   "license": "Apache-2.0"

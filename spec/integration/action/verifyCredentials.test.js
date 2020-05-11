@@ -6,6 +6,7 @@ const verifyCredentials = require('../../../verifyCredentials');
 
 describe('verifyCredentials', () => {
   if (fs.existsSync('.env')) {
+    // eslint-disable-next-line global-require
     require('dotenv').config();
   }
 
