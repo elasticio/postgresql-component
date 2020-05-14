@@ -31,8 +31,7 @@
     "q": "1.5.1",
     "sinon": "7.2.3",
     "sql-parser": "zubairov/sql-parser",
-    "sql-template-strings": "2.2.2",
-    "@elastic.io/component-logger": "0.0.1"
+    "sql-template-strings": "2.2.2"
   },
   "devDependencies": {
     "eslint": "5.16.0",
@@ -41,7 +40,8 @@
     "eslint-plugin-jsx-a11y": "6.2.1",
     "eslint-plugin-react": "7.12.4",
     "mocha": "5.2.0",
-    "chai": "4.2.0"
+    "chai": "4.2.0",
+    "@elastic.io/component-logger": "0.0.1"
   },
   "scripts": {
     "test": "npm run unit-test",
