@@ -45,7 +45,7 @@ describe('Select Action test', () => {
     let done = false;
     await new Promise((resolve) => {
       emitter.emit = resolve();
-      selectAction.process.call(emitter, msg, { conString, ...cfg });
+      selectAction.process.call(emitter, msg, conString);
       done = true;
     });
     expect(done).equals(true);
