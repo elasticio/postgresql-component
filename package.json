@@ -31,10 +31,10 @@
     "q": "1.5.1",
     "sinon": "7.2.3",
     "sql-parser": "zubairov/sql-parser",
-    "sql-template-strings": "2.2.2",
-    "@elastic.io/component-logger": "0.0.1"
+    "sql-template-strings": "2.2.2"
   },
   "devDependencies": {
+    "@elastic.io/component-logger": "0.0.1",
     "eslint": "5.16.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-plugin-import": "2.16.0",
