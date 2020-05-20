@@ -50,7 +50,7 @@ describe('GeneralSqlQuery Action test', function () {
       },
     };
 
-    const db = clientPgPromise.getDb(cfg);
+    const db = clientPgPromise.getDb(cfg, logger);
 
     db.tx((t) => t.batch([msgCreateTable.sql])).then((data) => {
       emitter.logger.info('Table was created successfully');
@@ -88,7 +88,7 @@ describe('GeneralSqlQuery Action test', function () {
       },
     };
 
-    const db = clientPgPromise.getDb(cfg);
+    const db = clientPgPromise.getDb(cfg, logger);
 
     db.tx((t) => t.batch([msgDeleteTable.sql])).then((data) => {
       emitter.logger.info('Table was deleted successfully');
