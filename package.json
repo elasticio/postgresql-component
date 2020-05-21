@@ -1,6 +1,6 @@
 {
   "name": "postresql-component",
-  "version": "1.3.2",
+  "version": "1.3.4",
   "description": "PostgreSQL component for elastic.io platform",
   "homepage": "http://www.elastic.io",
   "author": {
@@ -9,7 +9,7 @@
     "url": "http://elastic.io"
   },
   "engines": {
-    "npm": "6.13.4"
+    "node": ">=12.13.0"
   },
   "files": [
     "lib"
@@ -23,11 +23,11 @@
   "dependencies": {
     "dotenv": "6.2.0",
     "elasticio-node": "0.0.9",
-    "elasticio-sailor-nodejs": "2.5.4",
+    "elasticio-sailor-nodejs": "2.6.7",
     "lodash": "4.17.11",
-    "pg": "6.4.2",
-    "pg-cursor": "1.3.0",
-    "pg-promise": "8.6.4",
+    "pg": "8.2.1",
+    "pg-cursor": "2.2.1",
+    "pg-promise": "10.5.6",
     "q": "1.5.1",
     "sinon": "7.2.3",
     "sql-parser": "zubairov/sql-parser",
@@ -47,12 +47,6 @@
     "test": "npm run unit-test",
     "unit-test": "mocha spec/unit --recursive --timeout 50000",
     "integration-test": "mocha spec/integration --recursive --timeout 50000"
-  },
-  "eslintConfig": {
-    "extends": "xo-space",
-    "env": {
-      "mocha": true
-    }
   },
   "repository": "elasticio/postgresql-component",
   "license": "Apache-2.0"

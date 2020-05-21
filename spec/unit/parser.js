@@ -8,9 +8,9 @@ describe('SQL Parser', () => {
     const sql = 'select foo:number, bar as boo:boolean,hasi from users where ((id like $test) or (foo = $baz:number))';
     const result = utils.parseSQL(sql);
     assert.strictEqual(result.params.length, 2);
-    assert.strictEqual(result.params.map(r => `${r.value}:${r.type}`).join(','), 'baz:number,test:string');
+    assert.strictEqual(result.params.map((r) => `${r.value}:${r.type}`).join(','), 'baz:number,test:string');
     assert.strictEqual(result.fields.length, 3);
-    assert.strictEqual(result.fields.map(r => `${r.value}:${r.type}`).join(','), 'foo:number,boo:boolean,hasi:string');
+    assert.strictEqual(result.fields.map((r) => `${r.value}:${r.type}`).join(','), 'foo:number,boo:boolean,hasi:string');
   });
 
   it('should parse simple statement without where clause', () => {
@@ -18,7 +18,7 @@ describe('SQL Parser', () => {
     const result = utils.parseSQL(sql);
     assert.strictEqual(result.params.length, 0);
     assert.strictEqual(result.fields.length, 4);
-    assert.strictEqual(result.fields.map(r => `${r.value}:${r.type}`).join(','), 'id:string,name:string,url:string,phone:string');
+    assert.strictEqual(result.fields.map((r) => `${r.value}:${r.type}`).join(','), 'id:string,name:string,url:string,phone:string');
   });
 
   it('should parse query with *', () => {

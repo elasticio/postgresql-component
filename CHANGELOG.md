@@ -1,3 +1,7 @@
+## 1.3.4 (May 22, 2020)
+
+* Update sailor version to 2.6.7
+
 ## 1.3.3 (April 9, 2020)
 
 * Split Connection String credential into multiple fields

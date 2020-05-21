@@ -47,7 +47,10 @@
     "insertBulk" : {
       "title": "INSERT Bulk",
       "main": "./lib/actions/insertBulk.js",
-      "description": "Insert multiple rows specified at the field Values to defined columns into a single table",
+      "help": {
+        "description": "Insert multiple rows specified at the field Values to defined columns into a single table",
+        "link": "/components/postgresql/actions#insert-bulk-action"
+      },
       "fields": {
         "tableName": {
           "label": "Table Name",
@@ -81,7 +84,10 @@
     "insert" : {
       "title": "INSERT/UPDATE/DELETE",
       "main": "./lib/actions/insert.js",
-      "description": "INSERT or UPDATE or DELETE SQL Query",
+      "help": {
+        "description": "INSERT or UPDATE or DELETE SQL Query",
+        "link": "/components/postgresql/actions#insertupdatedelete-action"
+      },
       "fields": {
         "query": {
           "label": "SQL Query",
@@ -95,7 +101,10 @@
     "selectAction" : {
       "title": "SELECT",
       "main": "./lib/actions/select.js",
-      "description": "SELECT SQL Query",
+      "help": {
+        "description": "SELECT SQL Query",
+        "link": "/components/postgresql/actions#select-action"
+      },
       "fields": {
         "query": {
           "label": "SQL Query",
@@ -113,7 +122,10 @@
     },
     "executeSqlInjection": {
       "title": "SQL Injection",
-      "description": "Perform Action/Evaluate Function. Warning: should be used with caution!",
+      "help": {
+        "description": "Perform Action/Evaluate Function. Warning: should be used with caution!",
+        "link": "/components/postgresql/actions#sql-injection-action"
+      },
       "main": "./lib/actions/executeSqlInjection.js",
       "metadata": {
         "in": {
@@ -136,7 +148,10 @@
     },
     "generalSqlQuery": {
       "title": "SQL Query",
-      "description": "Execute Query or Statement in Query Language. Warning: should be used with caution!",
+      "help": {
+        "description": "Execute Query or Statement in Query Language. Warning: should be used with caution!",
+        "link": "/components/postgresql/actions#sql-query-action"
+      },
       "main": "./lib/actions/generalSqlQuery.js",
       "fields": {
         "sql": {
@@ -155,7 +170,10 @@
       "title": "SELECT",
       "main": "./lib/actions/select.js",
       "type": "polling",
-      "description": "SELECT SQL Query",
+      "help": {
+        "description": "SELECT SQL Query",
+        "link": "/components/postgresql/triggers#select-trigger-and-action"
+      },
       "fields": {
         "query": {
           "label": "SQL Query",
@@ -175,7 +193,9 @@
       "title": "SQL Query",
       "deprecated": true,
       "main": "./lib/actions/sqlQuery.js",
-      "description": "Custom SQL Query",
+      "help": {
+        "description": "Custom SQL Query"
+      },
       "dynamicMetadata": true,
       "type": "polling",
       "fields": {
