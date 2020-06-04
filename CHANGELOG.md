@@ -1,3 +1,7 @@
+## 1.3.5 (June 6, 2020)
+
+* Remove update docs on deploy script
+
 ## 1.3.4 (May 22, 2020)
 
 * Update sailor version to 2.6.7
