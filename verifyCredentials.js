@@ -1,11 +1,9 @@
-const clientPgPromise = require('./lib/clientPgPromise');
+const utils = require('./lib/utils');
 
 module.exports = async function verifyCredentials(credentials) {
   this.logger.info('Start verifying credentials');
   try {
-    const db = await clientPgPromise.getDb(credentials, this.logger);
-    await db.connect();
-    await clientPgPromise.detachDb(this.logger);
+    await utils.executeQuery(this.logger, 'select 1', null, credentials);
     this.logger.info('Credentials successfully verified');
     return { verified: true };
   } catch (e) {
