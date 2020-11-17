@@ -52,14 +52,14 @@ describe('GeneralSqlQuery Action test', function () {
 
     const db = clientPgPromise.getDb(cfg, logger);
 
-    db.tx((t) => t.batch([msgCreateTable.sql])).then((data) => {
+    db.tx(t => t.batch([msgCreateTable.sql])).then((data) => {
       emitter.logger.info('Table was created successfully');
       return data;
     }).catch((error) => {
       emitter.logger.info('Error:', error.message || error);
     });
 
-    db.tx((t) => t.batch([msgCreateFunction.sql])).then((data) => {
+    db.tx(t => t.batch([msgCreateFunction.sql])).then((data) => {
       emitter.logger.info('Table was created successfully');
       return data;
     }).catch((error) => {
@@ -90,14 +90,14 @@ describe('GeneralSqlQuery Action test', function () {
 
     const db = clientPgPromise.getDb(cfg, logger);
 
-    db.tx((t) => t.batch([msgDeleteTable.sql])).then((data) => {
+    db.tx(t => t.batch([msgDeleteTable.sql])).then((data) => {
       emitter.logger.info('Table was deleted successfully');
       return data;
     }).catch((error) => {
       emitter.logger.info('Error:', error.message || error);
     });
 
-    db.tx((t) => t.batch([msgDeleteFunction.sql])).then((data) => {
+    db.tx(t => t.batch([msgDeleteFunction.sql])).then((data) => {
       emitter.logger.info('Table was deleted successfully');
       return data;
     }).catch((error) => {

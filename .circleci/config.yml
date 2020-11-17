@@ -2,11 +2,14 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/node:12-stretch
+      - image: circleci/node:14-stretch
     steps:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Audit Dependencies
+          command: npm audit --audit-level=high
       - run:
           name: Installing Dependencies
           command: npm install

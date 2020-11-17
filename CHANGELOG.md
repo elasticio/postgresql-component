@@ -1,3 +1,9 @@
+## 1.3.6 (November 20, 2020)
+
+* Upgrade to sailor 2.6.18
+* Annual audit of the component code to check if it exposes a sensitive data in the logs
+* Annual npm vulnerabilities audit
+
 ## 1.3.5 (June 6, 2020)
 
 * Remove update docs on deploy script
