@@ -9,7 +9,11 @@ module.exports = async function verifyCredentials(credentials) {
     this.logger.info('Credentials successfully verified');
     return { verified: true };
   } catch (e) {
-    this.logger.error('Credentials are not valid, error code: ', e.code);
+    if (e.message.indexOf('SSL off') !== -1) {
+      this.logger.error('Error occurred! It seems like it is used self-signed SSL certificates. Try to enable \'Allow self-signed certificates\' option and retry verification.');
+    } else {
+      this.logger.error('Error occurred during credentials verification. Credentials are not valid');
+    }
     throw e;
   }
 };
