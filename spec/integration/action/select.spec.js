@@ -8,7 +8,7 @@ const selectAction = require('../../../lib/actions/select');
 
 let emitter;
 
-describe('Select Action test', () => {
+describe.skip('Select Action test', () => {
   if (fs.existsSync('.env')) {
     require('dotenv').config();
   }

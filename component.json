@@ -40,6 +40,10 @@
         "label": "Password",
         "required": false,
         "placeholder": "Password"
+      },
+      "allowSelfSignedCertificates": {
+        "viewClass": "CheckBoxView",
+        "label": "Allow self-signed certificates"
       }
     }
   },

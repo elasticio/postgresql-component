@@ -1,43 +1,15 @@
-const pg = require('pg');
+const clientPgPromise = require('./lib/clientPgPromise');
 
-// This function will be called by the platform to verify credentials
-module.exports = function verifyCredentials(credentials, cb) {
-  const {
-    host,
-    port,
-    database,
-    user,
-    password,
-    conString,
-  } = credentials;
-
-  const configuration = conString ? {
-    connectionString: conString,
-  } : {
-    user,
-    host,
-    database,
-    password,
-    port,
-  };
-
-  const pool = new pg.Pool(configuration);
-
-  // eslint-disable-next-line consistent-return
-  pool.connect((err, client, done) => {
-    if (err) {
-      this.logger.error('error fetching client from pool', err);
-      return cb(null, { verified: false });
-    }
-    client.query('SELECT $1::int AS number', ['1'], (error, res) => {
-      done();
-      if (error) {
-        this.logger.error('error running query', error);
-        return cb(null, { verified: false });
-      }
-      this.logger.info('Verified ok, result=%s', res.rows[0].number);
-      return cb(null, { verified: true });
-    });
-  });
-  pool.end();
+module.exports = async function verifyCredentials(credentials) {
+  this.logger.info('Start verifying credentials');
+  try {
+    const db = await clientPgPromise.getDb(credentials, this.logger);
+    await db.connect();
+    await clientPgPromise.detachDb(this.logger);
+    this.logger.info('Credentials successfully verified');
+    return { verified: true };
+  } catch (e) {
+    this.logger.error('Credentials are not valid, error code: ', e.code);
+    throw e;
+  }
 };
