@@ -10,6 +10,7 @@ const { database } = process.env;
 const { user } = process.env;
 const { password } = process.env;
 const { conString } = process.env;
+const { herokuConString } = process.env;
 module.exports = {
   configuration: {
     host,
@@ -27,4 +28,5 @@ module.exports = {
     user: 'test',
     password: 'test',
   },
+  herokuConString,
 };
