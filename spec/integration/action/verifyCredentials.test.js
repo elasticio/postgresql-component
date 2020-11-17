@@ -8,7 +8,7 @@ const { conString } = cfgConString;
 chai.use(chaiAsPromised);
 const { expect } = chai;
 
-describe('verifyCredentials', () => {
+describe.skip('verifyCredentials', () => {
   it('successfully verifies credentials with the connection string', async () => {
     const emittedData = await verifyCredentials.call({ logger }, {
       conString,
