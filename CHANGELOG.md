@@ -1,3 +1,10 @@
+## 1.4.0 (November 20, 2020)
+
+* Update Sailor version to 2.6.18
+* Annual audit of the component code to check if it exposes a sensitive data in the logs
+* Annual npm vulnerabilities audit
+* Add new options 'Allow self-signed certificates' for credentials ([issue 33](https://github.com/elasticio/postgresql-component/issues/33))
+
 ## 1.3.5 (June 6, 2020)
 
 * Remove update docs on deploy script

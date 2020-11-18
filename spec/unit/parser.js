@@ -165,7 +165,6 @@ describe('Prepare array of query string', () => {
     expect(result).to.deep.equal([sql]);
   });
 
-
   it('Should remove comments', () => {
     const sql = 'select * from  /*Hello*/ stg.testTable1 --comments';
     const preparedSql = ['select * from stg.testTable1'];

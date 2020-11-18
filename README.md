@@ -35,6 +35,14 @@ postgresql://user:password@your.postgresql.host:5432/dbname
 
 Note: if you fill out both the Connection String and all the other connection data fields, the platform will use the connection string to connect to the database.
 
+The option `Allow self-signed certificates` add to connection options following:
+```
+ssl: {
+    rejectUnauthorized: false
+  }
+```
+It could be useful for instances that are is using self-signed SSL certificates (like [Heroku](https://help.heroku.com/MDM23G46/why-am-i-getting-an-error-when-i-upgrade-to-pg-8))
+
 See more in [documentation](https://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING).
 
 ## SELECT Action & Trigger  

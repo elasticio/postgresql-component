@@ -1,43 +1,17 @@
-const pg = require('pg');
+const utils = require('./lib/utils');
 
-// This function will be called by the platform to verify credentials
-module.exports = function verifyCredentials(credentials, cb) {
-  const {
-    host,
-    port,
-    database,
-    user,
-    password,
-    conString,
-  } = credentials;
-
-  const configuration = conString ? {
-    connectionString: conString,
-  } : {
-    user,
-    host,
-    database,
-    password,
-    port,
-  };
-
-  const pool = new pg.Pool(configuration);
-
-  // eslint-disable-next-line consistent-return
-  pool.connect((err, client, done) => {
-    if (err) {
-      this.logger.error('error fetching client from pool', err);
-      return cb(null, { verified: false });
+module.exports = async function verifyCredentials(credentials) {
+  this.logger.info('Start verifying credentials');
+  try {
+    await utils.executeQuery(this.logger, 'select 1', null, credentials);
+    this.logger.info('Credentials successfully verified');
+    return { verified: true };
+  } catch (e) {
+    if (e.message.indexOf('SSL off') !== -1) {
+      this.logger.error('Error occurred! It seems like it is used self-signed SSL certificates. Try to enable \'Allow self-signed certificates\' option and retry verification.');
+    } else {
+      this.logger.error('Error occurred during credentials verification. Credentials are not valid');
     }
-    client.query('SELECT $1::int AS number', ['1'], (error, res) => {
-      done();
-      if (error) {
-        this.logger.error('error running query', error);
-        return cb(null, { verified: false });
-      }
-      this.logger.info('Verified ok, result=%s', res.rows[0].number);
-      return cb(null, { verified: true });
-    });
-  });
-  pool.end();
+    throw e;
+  }
 };
