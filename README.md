@@ -1,4 +1,5 @@
-# postgresql-component [![Build Status](https://travis-ci.org/elasticio/postgresql-component.svg?branch=master)](https://travis-ci.org/elasticio/postgresql-component) [![Dependency Status][daviddm-image]][daviddm-url]
+[![CircleCI](https://circleci.com/gh/elasticio/postgresql-component.svg?style=svg)](https://circleci.com/gh/elasticio/postgresql-component)
+# postgresql-component 
 
 > PostgreSQL component for the [elastic.io platform](http://www.elastic.io), supports AWS Redshift
 
