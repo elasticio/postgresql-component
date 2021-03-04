@@ -23,7 +23,8 @@ Following acitons are inside:
 [PostgreSQL Component Completeness Matrix](https://drive.google.com/open?id=1XQGqPAGUmT31EN1XRrk2iqRlPoqj5pi6E4KvsA7bayU)
 
 ### Environment Variables
-`LOG_LEVEL` - `trace` | `debug` | `info` | `warning` | `error` controls logger level
+
+No required Environment Variables
 
 ## Authentication
 
