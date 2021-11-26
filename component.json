@@ -1,5 +1,6 @@
 {
   "title": "PostgreSQL",
+  "version": "1.4.2",
   "description": "Simple SQL query against a PostgreSQL",
   "buildType": "docker",
   "docsUrl":"https://github.com/elasticio/postgresql-component",
