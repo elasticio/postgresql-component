@@ -1,6 +1,6 @@
 {
   "title": "PostgreSQL",
-  "version": "1.4.3-dev.1",
+  "version": "1.4.3",
   "description": "Simple SQL query against a PostgreSQL",
   "docsUrl":"https://github.com/elasticio/postgresql-component",
   "credentials": {
